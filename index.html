@@ -12,6 +12,8 @@
       <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <canvas id="network-canvas"></canvas>
+
     <!-- Navigation-->
      <nav class="navbar">   
         <a href="#home" class="logo">Muhd Aiman Rasman</a>
@@ -27,24 +29,30 @@
         </ul>
      </nav>
 
-     <!-- Hero Section-->
-      <section id="home" class="hero">
+      <!-- Hero Section-->
+      <section id="home" class="hero split-hero">
+        
         <div class="hero-content">
-            <h1>Cybersecurity Enthusiast</h1>
-            <p>Protecting systems, networks, and data through secure and resilient solutions</p>
-            <p class="highlight">Specializing in Computer Network Security</p>
+            <h1>Unlocking <span class="accent-blue">Secure</span> Potential</h1>
+            <p>Helping you build smarter, resilient digital infrastructures.</p>
             
             <div class="hero-buttons">
-                <a href="#contact" class="cta-button">Let's Connect</a>
-                
-                <a href="RESUME-MUHAMMAD AIMAN BIN RASMAN.pdf" download class="cta-button secondary-btn">
-                    <i class="fas fa-download"></i> Download Resume
+                <a href="#projects" class="cta-button blue-btn">
+                    View Projects <i class="fas fa-arrow-up-right-from-square" style="margin-left: 8px;"></i>
                 </a>
             </div>
         </div>
-        
-        <div class="hero-image">
-            <img src="profile.jpeg"Profile" class="profile-img">
+
+        <!-- NEW: Fading Circular Frame -->
+        <div class="hero-image-wrapper">
+            <div class="fading-circle-frame">
+            <img src="training 3.jpeg" class="fade-slide active" alt="Profile 1">
+            
+            <img src="photo.jpeg" class="fade-slide" alt="Profile 2">
+            <img src="training 4.jpeg" class="fade-slide" alt="Profile 3">
+            <img src="training.jpeg" class="fade-slide" alt="Profile 4">
+            <img src="training2.jpeg" class="fade-slide" alt="Profile 5">
+        </div>
         </div>
       </section>
 
@@ -52,156 +60,268 @@
        <section id="about" class="about section-padding">
         <h2>About Me</h2>
         <div class="about-content">
-            <p>I am a high-achieving Computer Science (Computer Network Security) undergraduate at Universiti Sultan Zainal Abidin (UniSZA) with a current CGPA of 3.77. I am actively seeking a 6-month internship (27 September 2026 - 26 March 2027) in cybersecurity, network defense, or digital forensics-related roles.</p>
-            <p>I am passionate about safeguarding digital infrastructure and building resilient, secure systems. My background includes developing end-to-end technical projects involving secure image steganography, IoT-based systems, and cryptographic algorithm implementation.</p>
+            <p>High-achieving Computer Science student specializing in Network Security with a CGPA 
+                of 3.77 and a consistent 5-time Dean’s List record. Technically proficient in Penetration 
+                Testing, Digital Forensics, and IoT-based systems, with hands-on experience in secure 
+                image steganography and cryptographic algorithm, intrusion detection system, and Security 
+                Operations Center (SOC). Proven leader with a track record of managing teams of up to 50 
+                members and driving digital growth for SMEs.  Seeking a Cybersecurity or Network Defense 
+                internship to apply advanced technical skills in a professional corporate environment.  </p>
         </div>
       </section>
 
       <!--Skills Section-->
+      <!--Skills Section-->
       <section id="skills" class="skills bg-darker">
-        <h2>Technical Expertise</h2>
-        <div class="skills-grid">
-            <div class="skill-card">
-                <i class="fas fa-shield-alt"></i>
-                <h3>Cybersecurity Operations</h3>
-                <p>Kali Linux, Penetration Testing, Vulnerability Scanning, Burp Suite, Metasploit</p>
+        <h2 id="skills" style="margin-top: 5rem;">Technical Expertise</h2>
+        
+        <div class="vertical-layout">
+            
+            <!-- Category 1: Cybersecurity Operations -->
+            <div class="vertical-item reveal-on-scroll">
+                <!-- NEW: LGMS Style Logo Grid (Replaced the Shield Icon) -->
+                <div class="tool-logo-grid">
+                    <!-- Make sure these filenames match exactly what you upload to GitHub! -->
+                    <img src="kali linux logo.png" alt="Kali Linux" title="Kali Linux">
+                    <img src="burp suite.png" alt="Burp Suite" title="Burp Suite">
+                    <img src="metasploit logo.png" alt="Metasploit" title="Metasploit">
+                </div>
+                
+                <div class="vertical-content">
+                    <h3>Cybersecurity Operations</h3>
+                    <p>Executing comprehensive vulnerability assessments and penetration tests to proactively identify and remediate system weaknesses</p>
+                </div>
             </div>
 
-            <div class="skill-card">
-                <i class="fas fa-search"></i>
-                <h3>Network Security & Forensics</h3>
-                <p>Wireshark, Nmap, Volatility, Autopsy, FTK Imager, Hashcat, HxD</p>
+            <!-- Category 2: Network Security & Forensics -->
+            <div class="vertical-item reveal-on-scroll">
+                <!-- NEW: LGMS Style Logo Grid (Replaced the Magnifying Glass Icon) -->
+                <div class="tool-logo-grid">
+                    <img src="wireshark logo.png" alt="Wireshark" title="Wireshark">
+                    <img src="nmap logo.png" alt="Nmap" title="Nmap">
+                    <img src="autopsy logo.png" alt="Autopsy" title="Autopsy">
+                    <img src="exiftool logo.png" alt="ExifTool" title="ExifTool">
+                    <img src="hashcat logo.png" alt="HashCat" title="HashCat">
+                    <img src="HxD logo.png" alt="HxD" title="HxD">
+                    <img src="john the reaper logo.png" alt="John the Ripper" title="John the Ripper">
+                </div>
+
+                <div class="vertical-content">
+                    <h3>Network Security & Forensics</h3>
+                    <p>Analyzing network traffic and conducting in-depth digital forensics investigations to uncover, trace, and respond to security incidents.</p>
+                </div>
             </div>
 
-            <div class="skill-card">
-                <i class="fas fa-microchip"></i>
-                <h3>Cryptography & IoT</h3>
-                <p>Python, ESP32 Microcontroller, PRNG & LSB Techniques, NS3 Simulations</p>
+            <!-- Category 3: Cryptography & IoT -->
+            <div class="vertical-item reveal-on-scroll">
+                <!-- NEW: LGMS Style Logo Grid (Replaced the Microchip Icon) -->
+                <div class="tool-logo-grid">
+                    <img src="python logo.png" alt="Python" title="Python">
+                    <img src="arduino logo.png" alt="ESP32" title="Arduino IDE">
+                    <img src="netbeans logo.png" alt="ESP32" title="NetBeans">
+                </div>
+
+                <div class="vertical-content">
+                    <h3>Cryptography & IoT</h3>
+                    <p>Designing secure embedded systems and implementing hybrid cryptographic techniques for robust data protection on microcontrollers.</p>
+                </div>
             </div>
-        </div>    
+
+        </div>   
        </section>
 
       <section id="projects" class="projects section-padding bg-darker">
-        <h2>Featured Projects</h2>
-        <div class="card-grid">
-            <div class="card">
-                <i class="fas fa-lock"></i>
-                <h3>Secure Data Transmission (Point-to-Point Communication) Using Image Steganography</h3>
-                <p class="date">Ongoing</p>
-                <p>Engineered a secure image steganography method utilizing ESP32 microcontrollers, integrating PRNG, XOR, and LSB techniques to prevent unauthorized access. The workflow involves manually inserting carrier images and secret files via a computer to ensure robust data concealment.</p>
+        <h2 id="projects" style="margin-top: 5rem;">Featured Projects</h2>
+        
+        <div class="vertical-layout">
+
+           <div class="vertical-item reveal-on-scroll">
+                <div class="vertical-content">
+                    <i class="fas fa-lock accent-icon"></i>
+                    <h3>Secure Data Transmission (Point-to-Point)</h3>
+                    <p class="date">Ongoing</p>
+                    <p>Engineered a secure image steganography method utilizing ESP32 microcontrollers, integrating PRNG, XOR, and LSB techniques to prevent unauthorized access.</p>
+                </div>
+
+                <div class="image-box">
+                    <img src="project-demo.jpg" alt="Secure Data Transmission">
+                </div>
             </div>
-            <div class="card">
-                <i class="fas fa-robot"></i>
-                <h3>SortBuddy (Smart Sorting Bin)</h3>
-                <p class="date">May 2025 - June 2025</p>
-                <p>Developed an autonomous robotic system utilizing an AI-driven vision system for real-time classification and sorting of recyclable waste streams (plastics, aluminium, paper).</p>
+
+            <div class="vertical-item reveal-on-scroll">
+                 <div class="vertical-content">
+                    <i class="fas fa-robot accent-icon"></i>
+                    <h3>SortBuddy (Smart Sorting Bin)</h3>
+                    <p class="date">May 2025 - June 2025</p>
+                    <p>Developed an autonomous robotic system utilizing an AI-driven vision system for real-time classification and sorting of recyclable waste streams.</p>
+                </div>
+
+                <div class="award-slider">
+                    <div class="slides">
+                        <img src="sortbuddy robot.jpeg" alt="SortBuddy Robot" class="slide">
+                        <!-- You can add more <img class="slide"> lines here if you have more photos! -->
+                    </div>
+                    <button class="slide-arrow prev-arrow"><i class="fas fa-chevron-left"></i></button>
+                    <button class="slide-arrow next-arrow"><i class="fas fa-chevron-right"></i></button>
+                </div>
             </div>
-            <div class="card">
-                <i class="fas fa-network-wired"></i>
-                <h3>MANET Routing Simulation</h3>
-                <p class="date">April 2025 - May 2025</p>
-                <p>Simulated emergency medical services in NS3 to model decentralized communication among mobile nodes. Evaluated AODV and DSDV protocols based on route discovery time and packet delivery ratio.</p>
-            </div>
-        </div>
+
       </section>
 
       <section id="leadership" class="leadership section-padding">
-        <h2>Leadership & Involvement</h2>
-        <div class="card-grid">
+        <h2 id="leadership" style="margin-top: 5rem;">Leadership & Involvement</h2>
+        
+        <div class="vertical-layout">
             
-            <div class="card">
-                <i class="fas fa-chalkboard-teacher"></i>
-                <h3>Lead Trainee Executive</h3>
-                <p class="date">RoboPro Club | Oct 2025 - Present</p>
-                <p>Handled structured training sessions for over 60 participants on embedded systems and ESP8266 programming. Conducted 3D modeling workshops using Tinkercad.</p>
+            <div class="vertical-item reveal-on-scroll">
+                <div class="vertical-content">
+                    <i class="fas fa-coins accent-icon"></i>
+                    <h3>Treasurer</h3>
+                    <p class="date">Jawatankuasa Perwakilan Pelajar (JPP) | Jul 2022 - Jul 2023</p>
+                    <p>Led and represented the student body in welfare and university affairs, coordinating with management to address student concerns.</p>
+                </div>
+                
+                <div class="award-slider">
+                    <div class="slides">
+                        <img src="jpp group photo.jpeg" alt="JPP Treasurer" class="slide">
+                    </div>
+                    <button class="slide-arrow prev-arrow"><i class="fas fa-chevron-left"></i></button>
+                    <button class="slide-arrow next-arrow"><i class="fas fa-chevron-right"></i></button>
+                </div>
             </div>
 
-            <div class="card">
-                <i class="fas fa-store"></i>
-                <h3>SULAM Project Team Member</h3>
-                <p class="date">Kedai Masakan Tokma | Mar 2025 - Oct 2025</p>
-                <p>Collaborated to digitalize SME operations, boosting brand visibility from 0 to 1,029 followers and 2,583 likes, significantly increasing sales and customer reach.</p>
+            <div class="vertical-item reveal-on-scroll">
+                <i class="fas fa-sitemap accent-icon" style="font-size: 4rem; margin-bottom: 1.5rem;"></i>
+                <div class="vertical-content">
+                    <h3>Program Director</h3>
+                    <p class="date">Projek Khidmat Masyarakat | Mar 2024 - Oct 2024</p>
+                    <p>Led a team of 50 committee members, coordinating logistics, stakeholder engagement, and resource mobilization for impactful community outreach.</p>
+                </div>
             </div>
 
-            <div class="card">
-                <i class="fas fa-sitemap"></i>
-                <h3>Program Director</h3>
-                <p class="date">Projek Khidmat Masyarakat | Mar 2024 - Oct 2024</p>
-                <p>Led a team of 50 committee members, coordinating logistics, stakeholder engagement, and resource mobilization for impactful community outreach.</p>
+            <div class="vertical-item reveal-on-scroll">
+                <i class="fas fa-store accent-icon" style="font-size: 4rem; margin-bottom: 1.5rem;"></i>
+                <div class="vertical-content">
+                    <h3>SULAM Project Team Member</h3>
+                    <p class="date">Kedai Masakan Tokma | Mar 2025 - Oct 2025</p>
+                    <p>Collaborated to digitalize SME operations, boosting brand visibility from 0 to 1,029 followers and 2,583 likes, significantly increasing sales and customer reach.</p>
+                </div>
             </div>
 
-            <div class="card" id="jpp-card">
-                <div class="card-fixed-content">
-                <i class="fas fa-coins"></i>
-                <h3>Treasurer</h3>
-                <p class="date">Jawatankuasa Perwakilan Pelajar (JPP) | Jul 2022 - Jul 2023</p>
-                <p>Led and represented the student body in welfare and university affairs, coordinating with management to address student concerns.</p>
+            <div class="vertical-item reveal-on-scroll">
+                <i class="fas fa-chalkboard-teacher accent-icon" style="font-size: 4rem; margin-bottom: 1.5rem;"></i>
+                <div class="vertical-content">
+                    <h3>Lead Trainee Executive</h3>
+                    <p class="date">RoboPro Club | Oct 2025 - Present</p>
+                    <p>Handled structured training sessions for over 60 participants on embedded systems and ESP8266 programming. Conducted 3D modeling workshops using Tinkercad.</p>
+                </div>
+
+                <div class="award-slider">
+                    <div class="slides">
+                        <img src="training group photo.jpeg" alt="Train Event 1" class="slide">
+                        <img src="training 4.jpeg" alt="Train Event 2" class="slide">
+                        <img src="training2.jpeg" alt="Train Event 2" class="slide">
+                        <img src="training.jpeg" alt="Train Event 2" class="slide">
+                        <img src="training 3.jpeg" alt="Train Event 2" class="slide">
+                    </div>
+                    <button class="slide-arrow prev-arrow"><i class="fas fa-chevron-left"></i></button>
+                    <button class="slide-arrow next-arrow"><i class="fas fa-chevron-right"></i></button>
+                </div>
             </div>
 
-            <div class="card-expand-content">
-                <img src="jpp.jpeg" alt="JPP Photo" class="card-photo">
-            </div>
-        </div>
-    </div>
-
-        <h2 id="awards" style="margin-top: 5rem; padding-top: 5rem;">Awards</h2>
-        <div class="card-grid">
-
-            <!-- 1. Tokoh Pelajar (1 Picture) -->
-            <div class="card expandable-card">
-                <div class="card-fixed-content">
-                    <i class="fas fa-star"></i>
+         <h2 id="awards" style="margin-top: 5rem;">Awards</h2>
+        
+         <div class="vertical-layout">
+            
+            <div class="vertical-item reveal-on-scroll">
+                 <div class="vertical-content">
+                    <i class="fas fa-star accent-icon" style="color: #ffd700"></i>
                     <h3>Anugerah Tokoh Pelajar Mithali</h3>
                     <p class="date">Januari 2026</p>
                     <p>Unanimously endorsed by the faculty for sustained technical excellence, high personal integrity, and maintaining a consistent CGPA above 3.50.</p>
                 </div>
-                <div class="card-expand-content">
-                    <img src="tokoh.jpeg" alt="Tokoh Pelajar" class="card-photo">
+
+                <div class="award-slider">
+                    <div class="slides">
+                        <img src="anugerah siswa.jpeg" alt="Siswa Event 1" class="slide">
+                        <img src="anugerah group photo.jpeg" alt="Siswa Event 2" class="slide">
+                    </div>
+                    <button class="slide-arrow prev-arrow"><i class="fas fa-chevron-left"></i></button>
+                    <button class="slide-arrow next-arrow"><i class="fas fa-chevron-right"></i></button>
                 </div>
             </div>
 
-            <!-- 2. VIC 25 (1 Picture) -->
-            <div class="card expandable-card">
-                <div class="card-fixed-content">
-                    <i class="fas fa-medal"></i>
-                    <h3>Virtual Innovation Competition 2025 (VIC 25)</h3>
-                    <p class="date">Gold Award</p>
+            <div class="vertical-item reveal-on-scroll">
+                <div class="vertical-content">
+                    <i class="fas fa-medal accent-icon" style="color: #ffc60aff;"></i>
+                    <h3>Gold Award</h3>
+                    <p class="date">Virtual Innovation Competition 2025 (VIC 25)</p>
                     <p>Secured the top prize for the development of the SortBuddy (Smart Sorting Garbage bin) autonomous robotic system.</p>
                 </div>
-                <div class="card-expand-content">
-                    <img src="vic.jpeg" alt="VIC 25 Award" class="card-photo">
+
+                <div class="award-slider">
+                    <div class="slides">
+                        <img src="vic cert.jpeg" alt="VIC 25 Award" class="slide">
+                    </div>
+                    <button class="slide-arrow prev-arrow"><i class="fas fa-chevron-left"></i></button>
+                    <button class="slide-arrow next-arrow"><i class="fas fa-chevron-right"></i></button>
                 </div>
             </div>
 
-            <!-- 3. MPI 25 (2 Pictures Side-by-Side) -->
-            <div class="card expandable-card">
-                <div class="card-fixed-content">
-                    <i class="fas fa-award"></i>
-                    <h3>Minggu Penyelidikan Inovasi 2025 (MPI 25)</h3>
-                    <p class="date">Bronze Award</p>
-                    <p>Awarded Bronze for the design and presentation of the SortBuddy (Smart Sorting Garbage bin) project.</p>
+            <div class="vertical-item reveal-on-scroll">
+                <div class="vertical-content">
+                    <i class="fas fa-award accent-icon" style="color: #cd7f32;"></i>
+                    <h3>Bronze Award</h3>
+                    <p class="date">Minggu Penyelidikan Inovasi 2025 (MPI 25)</p>
+                    <p>Awarded Bronze for the design and presentation of the SortBuddy project.</p>
                 </div>
-                <!-- Notice the extra 'dual-photo' class here! -->
-                <div class="card-expand-content dual-photo">
-                    <img src="mpi.jpeg" alt="MPI Event 1" class="card-photo">
-                    <img src="mpimedal.jpeg" alt="MPI Event 2" class="card-photo">
+                
+                <div class="award-slider">
+                    <div class="slides">
+                        <img src="mpi awards.jpeg" alt="MPI Event 1" class="slide">
+                        <img src="mpi sitting photo.jpeg" alt="MPI Event 2" class="slide">
+                        <img src="mpi standing photo.jpeg" alt="MPI Event 3" class="slide">
+                    </div>
+                    <button class="slide-arrow prev-arrow"><i class="fas fa-chevron-left"></i></button>
+                    <button class="slide-arrow next-arrow"><i class="fas fa-chevron-right"></i></button>
                 </div>
             </div>
 
-            <!-- 4. CTF (2 Pictures Side-by-Side) -->
-            <div class="card expandable-card">
-                <div class="card-fixed-content">
-                    <i class="fas fa-flag"></i>
-                    <h3>Capture The Flag UniSZA X UMK (CTF 3.0)</h3>
-                    <p class="date">Bronze Award</p>
+            <div class="vertical-item reveal-on-scroll">
+                <div class="vertical-content">
+                    <i class="fas fa-award accent-icon" style="color: #cd7f32;"></i>
+                    <h3>Bronze Award</h3>
+                    <p class="date">Capture The Flag UniSZA X UMK (CTF 3.0)</p>
                     <p>Demonstrated practical cybersecurity skills by securing the Bronze Award in a competitive cross-university CTF event.</p>
                 </div>
-                <div class="card-expand-content dual-photo">
-                    <img src="ctfphoto.jpeg" alt="CTF Event 1" class="card-photo">
-                    <img src="ctfcert.jpeg" alt="CTF Event 2" class="card-photo">
+
+                <div class="award-slider">
+                    <div class="slides">
+                        <img src="ctf cert.jpeg" alt="CTF Event 1" class="slide">
+                        <img src="ctf group photo.jpeg" alt="CTF Event 2" class="slide">
+                    </div>
+                    <button class="slide-arrow prev-arrow"><i class="fas fa-chevron-left"></i></button>
+                    <button class="slide-arrow next-arrow"><i class="fas fa-chevron-right"></i></button>
                 </div>
             </div>
 
+            <div class="vertical-item reveal-on-scroll">
+                <div class="vertical-content">
+                    <i class="fas fa-ranking-star accent-icon" style="color: #3df9ffff"></i>
+                    <h3>Top 5</h3>
+                    <p class="date">Hardware Hacking Examination 2025</p>
+                </div>
+
+                <div class="award-slider">
+                    <div class="slides">
+                        <img src="hardware hacking cert.jpeg" alt="Hacking Event 1" class="slide">
+                        <img src="hardware hacking photo.jpeg" alt="Hacking Event 2" class="slide">
+                    </div>
+                    <button class="slide-arrow prev-arrow"><i class="fas fa-chevron-left"></i></button>
+                    <button class="slide-arrow next-arrow"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+            
         </div>
       </section>
 

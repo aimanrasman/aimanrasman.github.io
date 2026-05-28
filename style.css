@@ -5,11 +5,15 @@ font-family: 'Segoe UI', sans-serif;
 }
 
 :root {
-    --dark-bg: #0a0a0a;
-    --darker-bg: #050505;
-    --accent: #2ecc71;
-    --accent-glow: rgba(46, 204, 113, 0.4);
-    --text: #ffffff;
+    --dark-bg: rgba(255, 255, 255, 0.85);      
+    --darker-bg: rgba(244, 246, 248, 0.85);    
+    --accent: #4a90e2;       /* The new sleek light blue */
+    --accent-glow: rgba(74, 144, 226, 0.2); /* Soft blue glow */
+    --accent-glow-strong: rgba(74, 144, 226, 0.7); /* Much stronger opacity for white bg */
+    --text: #1a1a1a;         
+    --text-muted: #555555;   
+    --card-bg: #ffffff;      
+    --card-border: rgba(0, 0, 0, 0.08); 
 }
 
 body {
@@ -28,10 +32,10 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(10, 10, 10, 0.95);
+   background: rgba(235, 245, 255, 0.95) !important;
     backdrop-filter: blur(10px);
     z-index: 1000;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(74, 144, 226, 0.15);
 }
 
 .logo {
@@ -45,19 +49,25 @@ padding-left: 2.5rem;
 
 .nav-links {
     display: flex;
-    gap: 2rem;
+    gap: 0.5rem; /* Slightly tighter gap so the pills sit nicely */
     list-style: none;
 }
 
 .nav-links a {
-color: var(--text);
-text-decoration: none;
-font-weight: 500;
-transition: all 0.3s ease;
-position: relative;
+    color: #1a1a1a; /* Dark gray/almost black for readability */
+    text-decoration: none;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
 }
 
-.nav-links a::after {
+.nav-links a:hover {
+    background-color: #f0f0f0; /* Subtle gray background pops up */
+    color: var(--accent); /* Text turns green */
+}
+
+/*.nav-links a::after {
     content: '';
     position: absolute;
     bottom: -5px;
@@ -66,11 +76,7 @@ position: relative;
     height: 2px;
     background: var(--accent);
     transition: width 0.3s ease;
-}
-
-.nav-links a:hover::after{
-    width: 100%;
-}
+}*/
 
 /*Hero Section*/
 .hero {
@@ -98,7 +104,10 @@ position: relative;
     border-radius: 50%;
     object-fit: cover;
     border: 3px solid var(--accent);
-    box-shadow: 0 0 50px var(--accent-glow);
+    box-shadow: 
+        0 0 10px var(--accent),             /* Sharp inner glow */
+        0 0 20px var(--accent-glow-strong),  /* Middle glow */
+        0 0 40px var(--accent-glow);         /* Soft outer fade */
     animation: float 3s ease-in-out infinite;
     filter: grayscale(0.2) contrast(1.1);
 }
@@ -111,23 +120,20 @@ position: relative;
 .hero h1 {
     font-size: 4rem;
     margin-bottom: 1.5rem;
-    background: linear-gradient(45deg, var(--accent) 30%,
-    #ffffff 70%);
+    background: linear-gradient(45deg, var(--accent) 30%, #333333 70%); /* Changed white to dark gray */
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
-.hero p {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
-    opacity: 0.9;
-    max-width: 600px;
+.hero p, .about-content p, .card p, .skill-card p {
+    color: var(--text-muted);
 }
 
 .cta-button {
     display: inline-block;
     padding: 1rem 2rem;
-    background: linear-gradient(45deg, var(--accent), #27ae60);
+    /* Replaced the dark green with a complementary dark blue (#2980b9) */
+    background: linear-gradient(45deg, var(--accent), #2980b9);
     color: white;
     border-radius: 8px;
     text-decoration: none;
@@ -243,7 +249,7 @@ footer {
     font-size: 1.1rem;
     max-width: 800px;
     margin: 0 auto 1.5rem auto;
-    color: rgba(255, 255, 255, 0.8);
+    color: var(--text-muted); /* Changes the text to a readable dark gray */
 }
 
 h2 {
@@ -261,13 +267,12 @@ h2 {
     align-items: start;
 }
 
-.card {
-    padding: 2rem;
-    border-radius: 15px;
-    background: rgba(255,255,255,0.05);
-    transition: all 0.3s ease;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(5px);
+.card, .skill-card, .expandable-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04); /* Clean, soft shadow */
+    border-radius: 15px; /* Gives everything the same smooth corners */
+    padding: 2rem;       /* Ensures the text has the same breathing room inside the box */
 }
 
 .card:hover {
@@ -449,8 +454,287 @@ h2 {
     height: 200px; /* Tall enough to see details, but short enough so the card isn't endlessly long */
 }
 
-/* Make side-by-side photos share exactly 50% of the space and be a bit shorter */
-.dual-photo .card-photo {
-    flex: 1; 
-    height: 150px; 
+/* --- NEW CENTERED HERO & BLUE ACCENT --- */
+
+.accent-blue {
+    color: #4a90e2; /* The exact bright blue from the screenshot */
+    font-style: italic;
+    font-weight: 300; /* Makes it look sleek and modern */
 }
+
+/* Override the old hero layout to center everything */
+.hero.centered-hero {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    position: relative; /* Crucial for the canvas background */
+    overflow: hidden;
+}
+
+.hero.centered-hero .hero-content {
+    padding: 0;
+    z-index: 2; /* Keeps text above the moving background */
+    max-width: 800px;
+}
+
+.hero.centered-hero h1 {
+    font-size: 4.5rem;
+    color: #1a1a1a;
+    background: none; /* Removes the old gradient */
+    -webkit-text-fill-color: initial;
+    margin-bottom: 1rem;
+}
+
+.hero.centered-hero p {
+    font-size: 1.3rem;
+    margin: 0 auto 2.5rem auto;
+}
+
+.center-buttons {
+    justify-content: center;
+}
+
+/* The New Blue Pill Button */
+.cta-button.blue-btn {
+    background: #4a90e2;
+    border-radius: 30px; /* Makes it a pill shape */
+    padding: 12px 28px;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(74, 144, 226, 0.3);
+}
+
+.cta-button.blue-btn:hover {
+    background: #357abd;
+    transform: translateY(-2px);
+}
+
+/* Positioning the moving background */
+#network-canvas {
+    position: fixed; /* Glues it to the screen */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1; /* Puts it completely behind everything else */
+    /* opacity: 0.8; */
+}
+
+/* --- VERTICAL SCROLL REVEAL LAYOUT --- */
+
+/* Centers the stack of items */
+.vertical-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6rem; /* Huge gap between items to allow for scrolling space */
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Individual item styling (No borders, no backgrounds!) */
+.vertical-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+/* Big, beautiful image styling */
+.vertical-image {
+    width: 100%;
+    max-width: 700px; /* Limits how massive the image can get */
+    height: auto;
+    border-radius: 20px;
+    margin-bottom: 2rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08); /* Soft shadow on the image itself */
+}
+
+.accent-icon {
+    font-size: 2.5rem;
+    color: var(--accent);
+    margin-bottom: 1rem;
+}
+
+/* --- THE ANIMATION MAGIC --- */
+
+/* 1. The Starting State (Hidden and pushed down 60px) */
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); /* Super smooth, elegant easing */
+}
+
+/* 2. The Ending State (Visible and in normal position) */
+.reveal-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- IMAGE SLIDER --- */
+.award-slider {
+    position: relative;
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto 2rem auto;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    background: var(--darker-bg); /* Provides a nice soft background for certificates */
+}
+
+.slides {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    height: 400px; /* Locks the height so the slider doesn't jump around */
+}
+
+.slide {
+    min-width: 100%;
+    height: 100%;
+    object-fit: contain; /* Ensures the whole certificate is visible without cutting */
+    padding: 10px; /* Gives the pictures a little breathing room */
+}
+
+/* Arrow Buttons */
+.slide-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.slide-arrow:hover {
+    background: var(--accent);
+    color: white;
+    transform: translateY(-50%) scale(1.1); /* Slight pop effect on hover */
+}
+
+.prev-arrow { left: 15px; }
+.next-arrow { right: 15px; }
+
+/* --- SINGLE IMAGE BOX (Matches the Slider Style) --- */
+.image-box {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto 2rem auto;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    background: var(--darker-bg);
+    height: 400px; /* Locks it to the exact same height as the sliders */
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-box img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Prevents awkward cropping */
+    border-radius: 10px;
+}
+
+/*logo icon*/
+.tool-logo-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem; /* Spacing between the tool logos */
+    margin-bottom: 1.5rem;
+}
+
+.tool-logo-grid img {
+    height: 60px; /* Forces all logos to be the exact same neat height */
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.05)); /* Adds a tiny, professional shadow */
+}
+
+/* Optional: Gives them a little pop when the user hovers over them */
+.tool-logo-grid img:hover {
+    transform: scale(1.15); 
+}
+
+/* --- SPLIT HERO LAYOUT --- */
+.hero.split-hero {
+    display: flex;
+    flex-direction: row; /* Puts text on left, image on right */
+    align-items: center;
+    justify-content: space-between;
+    text-align: left; 
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 12% 5%;
+}
+
+.hero.split-hero .hero-content {
+    flex: 1;
+    padding-right: 3rem;
+}
+
+/* --- CIRCULAR FADING FRAME --- */
+.hero-image-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fading-circle-frame {
+    position: relative;
+    width: 380px; 
+    height: 380px;
+    border-radius: 50%; /* This makes it a perfect circle */
+    overflow: hidden; /* Keeps the photos locked inside the circle */
+    
+    /* A much softer, professional glow */
+    box-shadow: 0 0 25px rgba(74, 144, 226, 0.2); 
+    border: 4px solid var(--dark-bg); 
+    background: var(--darker-bg); 
+}
+
+.fade-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures photos don't stretch */
+    opacity: 0; /* Hides all photos by default */
+    transition: opacity 1.5s ease-in-out; /* The smooth fade effect */
+}
+
+.fade-slide.active {
+    opacity: 1; /* Shows only the active photo */
+}
+
+/* Mobile view: Stacks them nicely if someone is on a phone */
+@media (max-width: 768px) {
+    .hero.split-hero {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 8rem;
+        gap: 3rem;
+    }
+    .hero.split-hero .hero-content {
+        padding-right: 0;
+    }
+    .fading-circle-frame {
+        width: 300px;
+        height: 300px;
+    }}
