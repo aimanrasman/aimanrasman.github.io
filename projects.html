@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberPortFolio</title>
+    <!-- link to fontawesome for inserting social media icons -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" 
+     integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" 
+     crossorigin="anonymous" referrerpolicy="no-referrer" />
+     <!-- link to css file -->
+      <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <canvas id="network-canvas"></canvas>
+
+    <!-- Navigation-->
+     <nav class="navbar">   
+        <a href="#home" class="logo">Muhd Aiman Rasman</a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="skills.html">Skills</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="leadership.html">Leadership</a></li>
+            <li><a href="awards.html">Awards</a></li>
+            <li><a href="experience.html">Experience</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+     </nav>
+
+      <section id="projects" class="projects section-padding bg-darker">
+        <h2 id="projects" style="margin-top: 5rem;">Featured Projects</h2>
+        
+        <div class="vertical-layout">
+
+           <div class="vertical-item reveal-on-scroll">
+                <i class="fas fa-chalkboard-teacher accent-icon" style="font-size: 4rem; margin-bottom: 1.5rem;"></i>
+                <div class="vertical-content">
+                    <h3>Secure Data Transmission (Point-to-Point)</h3>
+                    <p class="date">Ongoing</p>
+                    <p>Engineered a secure image steganography method utilizing ESP32 microcontrollers, integrating PRNG, XOR, and LSB techniques to prevent unauthorized access.</p>
+                </div>
+
+                <div class="award-slider">
+                    <div class="slides">
+                        <img src="steganography ESP32 configuration.jpeg" alt="ESP32 Configuration" class="slide">
+                        <img src="steganography data transmission.jpeg" alt="Data Transmission" class="slide">
+                        <img src="steganography ACK received.jpeg" alt="ACK Received" class="slide">
+                        <img src="steganography ESP32 external antenna.jpeg" alt="Extended Antenna" class="slide">
+
+                    </div>
+                    <button class="slide-arrow prev-arrow"><i class="fas fa-chevron-left"></i></button>
+                    <button class="slide-arrow next-arrow"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+
+            <div class="vertical-item reveal-on-scroll">
+                 <div class="vertical-content">
+                    <i class="fas fa-robot accent-icon"></i>
+                    <h3>SortBuddy (Smart Sorting Bin)</h3>
+                    <p class="date">May 2025 - June 2025</p>
+                    <p>Developed an autonomous robotic system utilizing an AI-driven vision system for real-time classification and sorting of recyclable waste streams.</p>
+                </div>
+
+                <div class="award-slider">
+                    <div class="slides">
+                        <img src="sortbuddy robot.jpeg" alt="SortBuddy Robot" class="slide">
+                        <!-- You can add more <img class="slide"> lines here if you have more photos! -->
+                    </div>
+                    <button class="slide-arrow prev-arrow"><i class="fas fa-chevron-left"></i></button>
+                    <button class="slide-arrow next-arrow"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+
+      </section>
+      
+       <!-- Footer-->
+        <footer>
+            <p>&copy; 2026 CyberTech. All rights reserved.</p>
+            <div class="social-links">
+                <a href="https://github.com/aimanrasman" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://instagram.com/aimwno" target="_blank"><i class="fab fa-instagram"></i></a>
+                
+                <a href="https://wa.me/60134081460" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                
+                <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+            </div>
+        </footer>
+
+        <!--link to javascript file-->
+        <script src="script.js"></script>
+
+</body>
+</html>
+

@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberPortFolio – Blog</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* ── Blog-specific overrides (all using portfolio CSS vars) ── */
+
+        /* Blog hero / section header */
+        .blog-hero {
+            padding: 8rem 2rem 3rem;
+            text-align: center;
+        }
+        .blog-hero h2 { margin-bottom: 0.5rem; }
+        .blog-hero p  { color: var(--text-secondary, #aaa); max-width: 700px; margin: 0 auto; }
+
+        /* Tab switcher */
+        .blog-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2.5rem auto 0;
+            flex-wrap: wrap;
+        }
+        .blog-tab-btn {
+            padding: 0.65rem 1.8rem;
+            border: 2px solid var(--accent, #00d4ff);
+            border-radius: 30px;
+            background: transparent;
+            color: var(--accent, #00d4ff);
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+        .blog-tab-btn:hover,
+        .blog-tab-btn.active {
+            background: var(--accent, #00d4ff);
+            color: #0a0a1a;
+        }
+
+        /* Blog post card containers */
+        .blog-section { display: none; padding: 3rem 2rem 5rem; max-width: 1100px; margin: 0 auto; }
+        .blog-section.active { display: block; }
+
+        /* ─── Post layout ─── */
+        .blog-post-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .blog-post-header .post-tag {
+            display: inline-block;
+            padding: 0.25rem 1rem;
+            border-radius: 20px;
+            background: rgba(0, 212, 255, 0.15);
+            color: var(--accent, #00d4ff);
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+        .blog-post-header h3 {
+            font-size: 2rem;
+            margin: 0.5rem 0 1rem;
+            color: var(--text, #e0e0e0);
+        }
+        .blog-post-header p {
+            color: var(--text-secondary, #aaa);
+            max-width: 720px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Content block: concept cards */
+        .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.2rem;
+            margin: 2.5rem 0;
+        }
+        .concept-card {
+            background: var(--card-bg, rgba(255,255,255,0.05));
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 12px;
+            padding: 1.4rem;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+        .concept-card:hover {
+            border-color: var(--accent, #00d4ff);
+            transform: translateY(-4px);
+        }
+        .concept-card .algo-icon {
+            font-size: 1.8rem;
+            margin-bottom: 0.6rem;
+            display: block;
+        }
+        .concept-card h4 { margin: 0 0 0.4rem; color: var(--accent, #00d4ff); }
+        .concept-card p  { margin: 0; font-size: 0.88rem; color: var(--text-secondary, #aaa); line-height: 1.55; }
+
+        /* Process flow diagram */
+        .sdlc-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            flex-wrap: wrap;
+            margin: 2.5rem 0;
+        }
+        .sdlc-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 1rem 0.8rem;
+            min-width: 110px;
+        }
+        .sdlc-step .step-icon {
+            width: 52px; height: 52px;
+            border-radius: 50%;
+            background: rgba(0, 212, 255, 0.12);
+            border: 2px solid var(--accent, #00d4ff);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent, #00d4ff);
+        }
+        .sdlc-step p { margin: 0; font-size: 0.8rem; color: var(--text-secondary, #aaa); font-weight: 600; }
+        .sdlc-arrow { font-size: 1.5rem; color: rgba(0, 212, 255, 0.4); padding: 0 0.2rem; }
+        @media (max-width: 600px) { .sdlc-arrow { display: none; } }
+
+        /* ─── VISUALIZER ─── */
+        .viz-wrapper {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(0, 212, 255, 0.18);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2.5rem 0;
+        }
+        .viz-wrapper h4 {
+            text-align: center;
+            color: var(--accent, #00d4ff);
+            margin-top: 0;
+            font-size: 1.1rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        /* algo buttons */
+        .algo-controls {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        .algo-btn-viz {
+            padding: 6px 16px;
+            border: 2px solid var(--accent, #00d4ff);
+            border-radius: 20px;
+            background: transparent;
+            color: var(--accent, #00d4ff);
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+        .algo-btn-viz:hover { background: rgba(0,212,255,0.15); }
+        .algo-btn-viz.active-algo { background: var(--accent, #00d4ff); color: #0a0a1a; }
+
+        .action-controls {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 1.2rem;
+        }
+        .action-btn-viz {
+            padding: 6px 18px;
+            border: none;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.1);
+            color: #e0e0e0;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+        .action-btn-viz:hover { background: rgba(255,255,255,0.2); }
+        .action-btn-viz.play-btn { background: var(--accent, #00d4ff); color: #0a0a1a; }
+        .action-btn-viz.play-btn:hover { opacity: 0.85; }
+
+        /* grid */
+        .viz-main {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .grid-area { flex: 0 0 auto; }
+        .viz-grid {
+            display: grid;
+            grid-template-columns: repeat(9, 44px);
+            grid-template-rows: repeat(5, 44px);
+            gap: 2px;
+            background: rgba(255,255,255,0.08);
+            border: 2px solid rgba(0,212,255,0.2);
+            border-radius: 8px;
+            padding: 4px;
+        }
+        .v-cell {
+            width: 44px; height: 44px;
+            background: rgba(255,255,255,0.04);
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 9px;
+            color: #888;
+            border-radius: 4px;
+            transition: all 0.2s;
+            text-align: center;
+            line-height: 1.1;
+        }
+        .v-cell.wall     { background: #2d3748; color: #555; }
+        .v-cell.start    { background: #38a169; color: white; border: 2px solid #48bb78; }
+        .v-cell.goal     { background: #805ad5; color: white; border: 2px solid #9f7aea; }
+        .v-cell.visited  { background: rgba(0, 180, 255, 0.25); color: #90cdf4; }
+        .v-cell.frontier { background: rgba(255, 220, 50, 0.25); transform: scale(0.93); }
+        .v-cell.path     { background: #e53e3e; color: white; transform: scale(1.07); z-index: 5; box-shadow: 0 0 8px rgba(229,62,62,0.6); }
+        .v-cell.current  { background: #dd6b20; color: white; transform: scale(1.1); z-index: 10; }
+
+        /* legend */
+        .viz-legend {
+            display: flex; flex-wrap: wrap; gap: 10px;
+            justify-content: center;
+            margin-top: 10px; font-size: 11px;
+            color: #aaa;
+        }
+        .leg-item { display: flex; align-items: center; gap: 5px; }
+        .leg-dot  { width: 12px; height: 12px; border-radius: 3px; }
+
+        /* stats + log */
+        .stats-area { min-width: 220px; flex: 1; }
+        .stat-row {
+            display: flex; justify-content: space-between;
+            padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+            font-size: 0.88rem; color: #ccc;
+        }
+        .stat-row strong { color: var(--accent, #00d4ff); }
+        .viz-log {
+            margin-top: 14px;
+            height: 160px;
+            overflow-y: auto;
+            background: #0d0d1a;
+            border: 1px solid rgba(0,212,255,0.15);
+            border-radius: 6px;
+            padding: 8px 10px;
+            font-family: monospace;
+            font-size: 11px;
+            color: #7dd3fc;
+        }
+
+        /* ─── STEGANOGRAPHY ─── */
+        .stego-flow {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.2rem;
+            margin: 2.5rem 0;
+        }
+        .stego-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(0,212,255,0.18);
+            border-radius: 12px;
+            padding: 1.4rem;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+        .stego-card:hover { border-color: var(--accent, #00d4ff); transform: translateY(-3px); }
+        .stego-card .steg-num {
+            display: inline-flex;
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            background: var(--accent, #00d4ff);
+            color: #0a0a1a;
+            font-weight: 900;
+            font-size: 0.9rem;
+            align-items: center; justify-content: center;
+            margin-bottom: 0.7rem;
+        }
+        .stego-card h4 { margin: 0 0 0.4rem; color: #e0e0e0; }
+        .stego-card p  { margin: 0; font-size: 0.87rem; color: var(--text-secondary, #aaa); line-height: 1.55; }
+
+        /* GUI mock / interactive demo */
+        .stego-demo {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(0,212,255,0.18);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2.5rem 0;
+        }
+        .stego-demo h4 {
+            text-align: center;
+            color: var(--accent, #00d4ff);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 1rem;
+            margin-top: 0;
+        }
+        .demo-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 1.2rem;
+            border-bottom: 2px solid rgba(0,212,255,0.15);
+            padding-bottom: 0;
+        }
+        .demo-tab {
+            padding: 8px 20px;
+            border: none; background: transparent;
+            color: #aaa; font-weight: 600;
+            cursor: pointer; font-size: 0.9rem;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+        .demo-tab:hover { color: #e0e0e0; }
+        .demo-tab.active { color: var(--accent, #00d4ff); border-bottom-color: var(--accent, #00d4ff); }
+
+        .demo-panel { display: none; }
+        .demo-panel.active { display: block; }
+
+        .demo-row {
+            display: flex; gap: 10px; align-items: center;
+            margin-bottom: 10px; flex-wrap: wrap;
+        }
+        .demo-row label { color: #aaa; font-size: 0.85rem; min-width: 110px; }
+        .demo-input {
+            flex: 1; padding: 7px 12px;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(0,212,255,0.25);
+            border-radius: 6px;
+            color: #e0e0e0;
+            font-family: monospace; font-size: 0.85rem;
+            outline: none;
+            min-width: 120px;
+        }
+        .demo-input:focus { border-color: var(--accent, #00d4ff); }
+        .demo-btn {
+            padding: 7px 20px;
+            border: none;
+            border-radius: 6px;
+            background: var(--accent, #00d4ff);
+            color: #0a0a1a;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-family: inherit;
+            transition: opacity 0.2s;
+        }
+        .demo-btn:hover { opacity: 0.82; }
+        .demo-btn.secondary {
+            background: rgba(255,255,255,0.1);
+            color: #e0e0e0;
+        }
+        .demo-output {
+            background: #0d0d1a;
+            border: 1px solid rgba(0,212,255,0.15);
+            border-radius: 8px;
+            padding: 12px;
+            font-family: monospace;
+            font-size: 12px;
+            color: #7dd3fc;
+            min-height: 100px;
+            max-height: 180px;
+            overflow-y: auto;
+            margin-top: 10px;
+            white-space: pre-wrap;
+        }
+        .pixel-canvas-row {
+            display: flex; gap: 1.5rem; flex-wrap: wrap;
+            justify-content: center; margin-top: 12px;
+        }
+        .pixel-canvas-wrap { text-align: center; }
+        .pixel-canvas-wrap p { font-size: 0.75rem; color: #888; margin: 4px 0 0; }
+
+        /* tech badges */
+        .tech-badge-row {
+            display: flex; flex-wrap: wrap; gap: 0.6rem;
+            margin: 1.5rem 0;
+        }
+        .tech-badge {
+            padding: 4px 14px;
+            border-radius: 20px;
+            background: rgba(0,212,255,0.12);
+            border: 1px solid rgba(0,212,255,0.3);
+            color: var(--accent, #00d4ff);
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* section divider */
+        .blog-divider {
+            border: none;
+            border-top: 1px solid rgba(0,212,255,0.12);
+            margin: 0 2rem;
+        }
+
+        /* inline highlight */
+        code.inline {
+            background: rgba(0,212,255,0.12);
+            color: var(--accent, #00d4ff);
+            padding: 2px 7px;
+            border-radius: 4px;
+            font-size: 0.88em;
+        }
+
+        /* SDLC pill timeline for stego */
+        .stego-pipeline {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+        .pipe-step {
+            display: flex; flex-direction: column;
+            align-items: center; text-align: center;
+            padding: 0.6rem 0.5rem; min-width: 90px;
+        }
+        .pipe-icon {
+            width: 46px; height: 46px; border-radius: 50%;
+            background: rgba(0,212,255,0.1);
+            border: 2px solid var(--accent, #00d4ff);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.1rem; color: var(--accent, #00d4ff);
+            margin-bottom: 0.4rem;
+        }
+        .pipe-step p { margin:0; font-size: 0.72rem; color: #aaa; font-weight: 600; }
+        .pipe-arrow { font-size: 1.3rem; color: rgba(0,212,255,0.35); }
+
+        @media (max-width: 500px) {
+            .pipe-arrow { display: none; }
+            .viz-grid {
+                grid-template-columns: repeat(9, 36px);
+                grid-template-rows: repeat(5, 36px);
+            }
+            .v-cell { width: 36px; height: 36px; font-size: 8px; }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="network-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="#home" class="logo">Muhd Aiman Rasman</a>
+        <button class="menu-toggle" aria-label="Toggle menu">
+            <i class="fas fa-bars"></i>
+        </button>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="skills.html">Skills</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="leadership.html">Leadership</a></li>
+            <li><a href="awards.html">Awards</a></li>
+            <li><a href="experience.html">Experience</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Blog Hero -->
+    <div class="blog-hero">
+        <h2>Developer <span class="accent-blue">Blog</span></h2>
+        <p>A technical deep-dive into real projects — exploring algorithm design, cryptographic engineering,
+            and the full software development lifecycle behind each solution.</p>
+
+        <!-- Tab Switcher -->
+        <div class="blog-tabs">
+            <button class="blog-tab-btn active" onclick="switchBlogTab('algo', this)">
+                <i class="fas fa-route" style="margin-right:6px;"></i>AI Pathfinding Visualizer
+            </button>
+            <button class="blog-tab-btn" onclick="switchBlogTab('stego', this)">
+                <i class="fas fa-user-secret" style="margin-right:6px;"></i>Image Steganography System
+            </button>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════════════
+         BLOG POST 1 — Algorithm Visualizer
+    ════════════════════════════════════════════════════ -->
+    <div class="blog-section active" id="blog-algo">
+
+        <div class="blog-post-header">
+            <span class="post-tag"><i class="fas fa-code" style="margin-right:5px;"></i>Artificial Intelligence · Python</span>
+            <h3>AI Campus Pathfinding — BFS, DFS, Greedy &amp; A*</h3>
+            <p>This project implements and compares four classical graph-search algorithms on a real campus
+                map layout. It was built to solidify understanding of uninformed vs. informed search strategies,
+                time/space complexity trade-offs, and algorithm correctness — core pillars of the AI software
+                development process.</p>
+        </div>
+
+        <!-- SDLC overview -->
+        <h3 style="color:var(--accent,#00d4ff); margin-bottom:1rem;">
+            <i class="fas fa-layer-group" style="margin-right:8px;"></i>Software Development Process
+        </h3>
+        <p style="color:#aaa; line-height:1.75; margin-bottom:1.5rem;">
+            The project followed an iterative, test-driven approach. Each algorithm was isolated, implemented,
+            verified manually against the known campus graph, then integrated into a unified runner so results
+            could be compared side-by-side. The campus nodes and edges were modelled first as an abstract
+            adjacency list before any code was written — a deliberate design-before-code discipline.
+        </p>
+
+        <div class="sdlc-flow">
+            <div class="sdlc-step">
+                <div class="step-icon"><i class="fas fa-map"></i></div>
+                <p>Problem<br>Modelling</p>
+            </div>
+            <span class="sdlc-arrow">→</span>
+            <div class="sdlc-step">
+                <div class="step-icon"><i class="fas fa-sitemap"></i></div>
+                <p>Graph<br>Design</p>
+            </div>
+            <span class="sdlc-arrow">→</span>
+            <div class="sdlc-step">
+                <div class="step-icon"><i class="fas fa-code"></i></div>
+                <p>Algorithm<br>Implementation</p>
+            </div>
+            <span class="sdlc-arrow">→</span>
+            <div class="sdlc-step">
+                <div class="step-icon"><i class="fas fa-vials"></i></div>
+                <p>Testing &amp;<br>Validation</p>
+            </div>
+            <span class="sdlc-arrow">→</span>
+            <div class="sdlc-step">
+                <div class="step-icon"><i class="fas fa-chart-bar"></i></div>
+                <p>Analysis &amp;<br>Comparison</p>
+            </div>
+        </div>
+
+        <!-- Algorithm cards -->
+        <h3 style="color:var(--accent,#00d4ff); margin-bottom:1rem;">
+            <i class="fas fa-brain" style="margin-right:8px;"></i>Algorithm Breakdown
+        </h3>
+        <div class="concept-grid">
+            <div class="concept-card">
+                <span class="algo-icon">🔵</span>
+                <h4>BFS — Breadth-First Search</h4>
+                <p>Explores all nodes at the current depth before going deeper. Uses a <code class="inline">deque</code> as a
+                    FIFO queue. <strong>Guarantees the shortest path</strong> in unweighted graphs.
+                    Space complexity: <code class="inline">O(V)</code>.</p>
+            </div>
+            <div class="concept-card">
+                <span class="algo-icon">🔴</span>
+                <h4>DFS — Depth-First Search</h4>
+                <p>Dives as deep as possible down a branch before backtracking. Uses a <code class="inline">stack</code>
+                    (LIFO). Memory-efficient but does <strong>not guarantee</strong> the shortest path.
+                    Space complexity: <code class="inline">O(depth)</code>.</p>
+            </div>
+            <div class="concept-card">
+                <span class="algo-icon">🟡</span>
+                <h4>Greedy Best-First</h4>
+                <p>Always expands the node closest to the goal using a heuristic <code class="inline">h(n)</code> — Manhattan
+                    distance. Fast but can be misled and <strong>does not guarantee optimality</strong>.</p>
+            </div>
+            <div class="concept-card">
+                <span class="algo-icon">🟢</span>
+                <h4>A* Search</h4>
+                <p>Combines actual cost <code class="inline">g(n)</code> and heuristic estimate <code class="inline">h(n)</code>:
+                    <code class="inline">f(n) = g(n) + h(n)</code>. <strong>Optimal and complete</strong> with an admissible
+                    heuristic. The gold standard for pathfinding.</p>
+            </div>
+        </div>
+
+        <!-- Tech stack -->
+        <h3 style="color:var(--accent,#00d4ff); margin-bottom:0.8rem;">
+            <i class="fas fa-tools" style="margin-right:8px;"></i>Technologies Used
+        </h3>
+        <div class="tech-badge-row">
+            <span class="tech-badge"><i class="fab fa-python" style="margin-right:4px;"></i>Python 3</span>
+            <span class="tech-badge">heapq (Priority Queue)</span>
+            <span class="tech-badge">collections.deque</span>
+            <span class="tech-badge">Manhattan Heuristic</span>
+            <span class="tech-badge">Adjacency List Graph</span>
+            <span class="tech-badge">Animated Step Output</span>
+        </div>
+
+        <!-- Key design decisions -->
+        <h3 style="color:var(--accent,#00d4ff); margin:1.8rem 0 0.8rem;">
+            <i class="fas fa-lightbulb" style="margin-right:8px;"></i>Key Design Decisions
+        </h3>
+        <p style="color:#aaa; line-height:1.75; margin-bottom:0.8rem;">
+            All four algorithms share the same <strong>campus graph</strong> — a hand-crafted adjacency list
+            representing real node relationships (Library → Admin → Lab, etc.). The heuristic function
+            <code class="inline">h(n)</code> uses Manhattan distance computed from stored <code class="inline">(x, y)</code>
+            coordinates for each node, making it admissible and consistent. The live output via
+            <code class="inline">time.sleep()</code> was intentional — it simulates the step-by-step
+            "thought process" of each algorithm, turning a terminal script into an educational tool.
+        </p>
+        <p style="color:#aaa; line-height:1.75;">
+            A deliberate architectural choice was to keep each algorithm in its own file
+            (<code class="inline">BFS.py</code>, <code class="inline">DFS.py</code>, <code class="inline">Greedy.py</code>,
+            <code class="inline">A_Star.py</code>) rather than a single monolithic script — enforcing the
+            <strong>Single Responsibility Principle</strong> and making each implementation independently testable.
+        </p>
+
+        <!-- Interactive Visualizer -->
+        <h3 style="color:var(--accent,#00d4ff); margin:2rem 0 0.8rem;">
+            <i class="fas fa-play-circle" style="margin-right:8px;"></i>Interactive Demo
+        </h3>
+        <p style="color:#aaa; line-height:1.75; margin-bottom:0;">
+            Select an algorithm and press <strong>Play</strong> to watch it traverse the campus grid in real time.
+            The grid mirrors the exact topology from the Python source files — <em>Library (0,0)</em> is Start,
+            <em>Main Hall (4,8)</em> is Goal, and blocked rows simulate campus walls.
+        </p>
+
+        <div class="viz-wrapper">
+            <h4><i class="fas fa-project-diagram" style="margin-right:6px;"></i>Campus Pathfinding Visualizer (5 × 9 Grid)</h4>
+
+            <div class="algo-controls">
+                <button id="v-btn-bfs"    class="algo-btn-viz active-algo" onclick="vizSetAlgo('BFS')">BFS</button>
+                <button id="v-btn-dfs"    class="algo-btn-viz"             onclick="vizSetAlgo('DFS')">DFS</button>
+                <button id="v-btn-greedy" class="algo-btn-viz"             onclick="vizSetAlgo('Greedy')">Greedy</button>
+                <button id="v-btn-astar"  class="algo-btn-viz"             onclick="vizSetAlgo('A*')">A*</button>
+            </div>
+            <div class="action-controls">
+                <button class="action-btn-viz play-btn" id="v-playBtn" onclick="vizPlayPause()">▶ Play</button>
+                <button class="action-btn-viz"          onclick="vizStep()">Step →</button>
+                <button class="action-btn-viz"          onclick="vizReset()">↺ Reset</button>
+            </div>
+
+            <div class="viz-main">
+                <div class="grid-area">
+                    <div class="viz-grid" id="v-grid"></div>
+                    <div class="viz-legend">
+                        <div class="leg-item"><div class="leg-dot" style="background:#38a169;"></div>Start</div>
+                        <div class="leg-item"><div class="leg-dot" style="background:#805ad5;"></div>Goal</div>
+                        <div class="leg-item"><div class="leg-dot" style="background:#2d3748;"></div>Wall</div>
+                        <div class="leg-item"><div class="leg-dot" style="background:rgba(0,180,255,0.4);"></div>Visited</div>
+                        <div class="leg-item"><div class="leg-dot" style="background:rgba(255,220,50,0.4);"></div>Frontier</div>
+                        <div class="leg-item"><div class="leg-dot" style="background:#e53e3e;"></div>Path</div>
+                        <div class="leg-item"><div class="leg-dot" style="background:#dd6b20;"></div>Current</div>
+                    </div>
+                </div>
+
+                <div class="stats-area">
+                    <div class="stat-row"><span>Algorithm</span><strong id="v-stat-algo">BFS</strong></div>
+                    <div class="stat-row"><span>Nodes Expanded</span><strong id="v-stat-expanded">0</strong></div>
+                    <div class="stat-row"><span>Frontier Size</span><strong id="v-stat-frontier">0</strong></div>
+                    <div class="stat-row"><span>Path Length</span><strong id="v-stat-path">—</strong></div>
+                    <div class="viz-log" id="v-log"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Complexity table -->
+        <h3 style="color:var(--accent,#00d4ff); margin:2rem 0 1rem;">
+            <i class="fas fa-table" style="margin-right:8px;"></i>Complexity Comparison
+        </h3>
+        <div style="overflow-x:auto;">
+            <table style="width:100%; border-collapse:collapse; font-size:0.88rem; color:#ccc;">
+                <thead>
+                    <tr style="background:rgba(0,212,255,0.1); color:var(--accent,#00d4ff);">
+                        <th style="padding:10px 14px; text-align:left; border-bottom:2px solid rgba(0,212,255,0.3);">Algorithm</th>
+                        <th style="padding:10px 14px; border-bottom:2px solid rgba(0,212,255,0.3);">Time</th>
+                        <th style="padding:10px 14px; border-bottom:2px solid rgba(0,212,255,0.3);">Space</th>
+                        <th style="padding:10px 14px; border-bottom:2px solid rgba(0,212,255,0.3);">Complete?</th>
+                        <th style="padding:10px 14px; border-bottom:2px solid rgba(0,212,255,0.3);">Optimal?</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.06);">
+                        <td style="padding:9px 14px;">BFS</td>
+                        <td style="padding:9px 14px; text-align:center;">O(V + E)</td>
+                        <td style="padding:9px 14px; text-align:center;">O(V)</td>
+                        <td style="padding:9px 14px; text-align:center; color:#68d391;">✔ Yes</td>
+                        <td style="padding:9px 14px; text-align:center; color:#68d391;">✔ Yes</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.06);">
+                        <td style="padding:9px 14px;">DFS</td>
+                        <td style="padding:9px 14px; text-align:center;">O(V + E)</td>
+                        <td style="padding:9px 14px; text-align:center;">O(depth)</td>
+                        <td style="padding:9px 14px; text-align:center; color:#68d391;">✔ Yes</td>
+                        <td style="padding:9px 14px; text-align:center; color:#fc8181;">✘ No</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.06);">
+                        <td style="padding:9px 14px;">Greedy</td>
+                        <td style="padding:9px 14px; text-align:center;">O(b<sup>m</sup>)</td>
+                        <td style="padding:9px 14px; text-align:center;">O(b<sup>m</sup>)</td>
+                        <td style="padding:9px 14px; text-align:center; color:#fc8181;">✘ No</td>
+                        <td style="padding:9px 14px; text-align:center; color:#fc8181;">✘ No</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:9px 14px;">A*</td>
+                        <td style="padding:9px 14px; text-align:center;">O(b<sup>d</sup>)</td>
+                        <td style="padding:9px 14px; text-align:center;">O(b<sup>d</sup>)</td>
+                        <td style="padding:9px 14px; text-align:center; color:#68d391;">✔ Yes</td>
+                        <td style="padding:9px 14px; text-align:center; color:#68d391;">✔ Yes</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p style="color:#666; font-size:0.78rem; margin-top:6px;">V = vertices, E = edges, b = branching factor, d = solution depth, m = max depth</p>
+
+    </div><!-- /blog-algo -->
+
+    <hr class="blog-divider">
+
+    <!-- ════════════════════════════════════════════════════
+         BLOG POST 2 — Image Steganography System
+    ════════════════════════════════════════════════════ -->
+    <div class="blog-section" id="blog-stego">
+
+        <div class="blog-post-header">
+            <span class="post-tag"><i class="fas fa-lock" style="margin-right:5px;"></i>Cryptography · Java · IoT</span>
+            <h3>Secure Image Steganography — PRNG + XOR + LSB</h3>
+            <p>A full-stack Java desktop application that conceals any file inside a PNG image using a three-layer
+                security pipeline: PRNG-shuffled pixel selection, XOR cipher encryption, and Least Significant Bit
+                (LSB) substitution. Designed for point-to-point transmission over an ESP32 wireless link.</p>
+        </div>
+
+        <!-- SDLC process -->
+        <h3 style="color:var(--accent,#00d4ff); margin-bottom:1rem;">
+            <i class="fas fa-layer-group" style="margin-right:8px;"></i>Software Development Process
+        </h3>
+        <p style="color:#aaa; line-height:1.75; margin-bottom:1.5rem;">
+            The system was engineered top-down — starting with a threat model (what must an attacker
+            <em>not</em> be able to do?), then deriving the cryptographic requirements, then designing
+            the data pipeline, and finally building the Swing GUI as the outermost layer. This
+            security-first SDLC approach ensured that no convenience feature ever compromised the
+            core encoding/decoding contract.
+        </p>
+
+        <div class="sdlc-flow">
+            <div class="sdlc-step">
+                <div class="step-icon"><i class="fas fa-shield-alt"></i></div>
+                <p>Threat<br>Modelling</p>
+            </div>
+            <span class="sdlc-arrow">→</span>
+            <div class="sdlc-step">
+                <div class="step-icon"><i class="fas fa-drafting-compass"></i></div>
+                <p>System<br>Architecture</p>
+            </div>
+            <span class="sdlc-arrow">→</span>
+            <div class="sdlc-step">
+                <div class="step-icon"><i class="fas fa-code"></i></div>
+                <p>Core Engine<br>Development</p>
+            </div>
+            <span class="sdlc-arrow">→</span>
+            <div class="sdlc-step">
+                <div class="step-icon"><i class="fas fa-desktop"></i></div>
+                <p>GUI<br>Integration</p>
+            </div>
+            <span class="sdlc-arrow">→</span>
+            <div class="sdlc-step">
+                <div class="step-icon"><i class="fas fa-satellite-dish"></i></div>
+                <p>ESP32<br>Transmit</p>
+            </div>
+        </div>
+
+        <!-- Pipeline explained -->
+        <h3 style="color:var(--accent,#00d4ff); margin-bottom:1rem;">
+            <i class="fas fa-project-diagram" style="margin-right:8px;"></i>Three-Layer Security Pipeline
+        </h3>
+        <div class="stego-flow">
+            <div class="stego-card">
+                <span class="steg-num">1</span>
+                <h4>PRNG Pixel Shuffling</h4>
+                <p>Instead of writing data sequentially into pixels (easily detected by steganalysis),
+                    the pixel write-order is <strong>randomised using a seeded PRNG</strong>
+                    (<code class="inline">java.util.Random</code>). Without the correct seed,
+                    an attacker cannot even locate where bits are hidden. The same seed deterministically
+                    recreates the order on decode.</p>
+            </div>
+            <div class="stego-card">
+                <span class="steg-num">2</span>
+                <h4>XOR Cipher Encryption</h4>
+                <p>Before embedding, the secret file bytes are XOR-encrypted with a keystream produced by a
+                    <strong>second, independent</strong> seeded PRNG (<code class="inline">PRNGXORCipher</code>).
+                    XOR is self-inverse — the same operation both encrypts and decrypts — making the cipher
+                    symmetric and stateless. Payload is unreadable even if extracted correctly.</p>
+            </div>
+            <div class="stego-card">
+                <span class="steg-num">3</span>
+                <h4>LSB Substitution</h4>
+                <p>Each bit of the encrypted payload replaces the <strong>Least Significant Bit</strong>
+                    of the R, G, and B channel of a selected pixel (<code class="inline">3 bits/pixel</code>).
+                    This causes a maximum colour shift of ±1 per channel — perceptually invisible and
+                    producing PSNR values typically above 50 dB.</p>
+            </div>
+        </div>
+
+        <!-- Binary stream format -->
+        <h3 style="color:var(--accent,#00d4ff); margin:1.8rem 0 0.8rem;">
+            <i class="fas fa-stream" style="margin-right:8px;"></i>Embedded Binary Stream Format
+        </h3>
+        <p style="color:#aaa; line-height:1.75;">
+            The payload written into the image is self-describing — a decoder needs only the seed to
+            reconstruct everything:
+        </p>
+        <div style="background:#0d0d1a; border:1px solid rgba(0,212,255,0.2); border-radius:8px; padding:1.2rem; font-family:monospace; font-size:0.82rem; color:#7dd3fc; overflow-x:auto; margin:1rem 0;">
+[ 32 bits  : encrypted data length (int) ]
+[ 8  bits  : file extension length       ]
+[ n×8 bits : extension chars (ASCII)     ]
+[ m×8 bits : XOR-encrypted file bytes    ]
+        </div>
+        <p style="color:#aaa; line-height:1.75;">
+            The header is stored unencrypted (but in randomised pixel order) so the decoder can determine
+            how many bytes to extract before decrypting. A sanity check rejects obviously bogus
+            <code class="inline">dataLength</code> values (&gt; 50 MB) to guard against wrong seeds
+            producing garbage reads.
+        </p>
+
+        <!-- Module architecture -->
+        <h3 style="color:var(--accent,#00d4ff); margin:1.8rem 0 1rem;">
+            <i class="fas fa-cubes" style="margin-right:8px;"></i>Module Architecture
+        </h3>
+        <div class="concept-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+            <div class="concept-card">
+                <span class="algo-icon" style="font-size:1.3rem;">🔐</span>
+                <h4>Encoder.java</h4>
+                <p>Encrypts payload, builds the binary stream, shuffles pixels via PRNG, and writes
+                    LSBs into a copy of the carrier image.</p>
+            </div>
+            <div class="concept-card">
+                <span class="algo-icon" style="font-size:1.3rem;">🔓</span>
+                <h4>Decoder.java</h4>
+                <p>Replicates the pixel shuffle order, reads LSBs back to binary, parses the header,
+                    and decrypts the payload with a fresh <code class="inline">PRNGXORCipher</code>.</p>
+            </div>
+            <div class="concept-card">
+                <span class="algo-icon" style="font-size:1.3rem;">🔑</span>
+                <h4>PRNGXORCipher.java</h4>
+                <p>Stateless symmetric cipher. Each call creates a freshly seeded PRNG — encrypt and
+                    decrypt are therefore independent and ordering-free.</p>
+            </div>
+            <div class="concept-card">
+                <span class="algo-icon" style="font-size:1.3rem;">🖥️</span>
+                <h4>MainFrame.java</h4>
+                <p>Tabbed Swing window hosting Encode, Decode, and Transmit (ESP32) panels. Uses system
+                    Look &amp; Feel for native OS appearance.</p>
+            </div>
+            <div class="concept-card">
+                <span class="algo-icon" style="font-size:1.3rem;">📤</span>
+                <h4>EncodePanel.java</h4>
+                <p>Carrier image browser, PRNG seed field, secret file picker, capacity checker, and
+                    post-encode MSE/PSNR metric display.</p>
+            </div>
+            <div class="concept-card">
+                <span class="algo-icon" style="font-size:1.3rem;">📥</span>
+                <h4>DecodePanel.java</h4>
+                <p>Stego image loader (from disk or pushed from the Transmit tab), seed input, live
+                    decode log, and file save dialog.</p>
+            </div>
+        </div>
+
+        <!-- Tech stack -->
+        <h3 style="color:var(--accent,#00d4ff); margin:1.8rem 0 0.8rem;">
+            <i class="fas fa-tools" style="margin-right:8px;"></i>Technologies Used
+        </h3>
+        <div class="tech-badge-row">
+            <span class="tech-badge"><i class="fab fa-java" style="margin-right:4px;"></i>Java (Swing)</span>
+            <span class="tech-badge">BufferedImage API</span>
+            <span class="tech-badge">java.util.Random (PRNG)</span>
+            <span class="tech-badge">LSB Substitution</span>
+            <span class="tech-badge">XOR Cipher</span>
+            <span class="tech-badge">ESP32 (Arduino IDE)</span>
+            <span class="tech-badge">MSE / PSNR Metrics</span>
+            <span class="tech-badge">NetBeans IDE</span>
+        </div>
+
+        <!-- Interactive simulator -->
+        <h3 style="color:var(--accent,#00d4ff); margin:2rem 0 0.8rem;">
+            <i class="fas fa-play-circle" style="margin-right:8px;"></i>Interactive Demo
+        </h3>
+        <p style="color:#aaa; line-height:1.75; margin-bottom:0;">
+            Simulate the encode and decode pipeline below. The pixel visualiser shows how LSB changes
+            alter individual pixel colours — demonstrating the near-imperceptible nature of the technique.
+        </p>
+
+        <div class="stego-demo">
+            <h4><i class="fas fa-user-secret" style="margin-right:6px;"></i>Steganography Simulator</h4>
+
+            <div class="demo-tabs">
+                <button class="demo-tab active" onclick="switchDemoTab('encode', this)">Encode</button>
+                <button class="demo-tab"        onclick="switchDemoTab('decode', this)">Decode</button>
+                <button class="demo-tab"        onclick="switchDemoTab('pixel',  this)">Pixel Inspector</button>
+            </div>
+
+            <!-- Encode panel -->
+            <div class="demo-panel active" id="demo-encode">
+                <div class="demo-row">
+                    <label>Secret Message</label>
+                    <input class="demo-input" id="enc-msg" type="text" value="Hello, World!" maxlength="60">
+                </div>
+                <div class="demo-row">
+                    <label>PRNG Seed</label>
+                    <input class="demo-input" id="enc-seed" type="number" value="987654321">
+                    <button class="demo-btn secondary" onclick="randomSeed()">🎲 Random</button>
+                </div>
+                <div class="demo-row">
+                    <button class="demo-btn" onclick="runEncode()">🔒 Encode Message</button>
+                </div>
+                <div class="demo-output" id="enc-output">Output will appear here…</div>
+            </div>
+
+            <!-- Decode panel -->
+            <div class="demo-panel" id="demo-decode">
+                <div class="demo-row">
+                    <label>Encoded Payload</label>
+                    <input class="demo-input" id="dec-payload" type="text" placeholder="Paste encoded hex from Encode tab">
+                </div>
+                <div class="demo-row">
+                    <label>PRNG Seed</label>
+                    <input class="demo-input" id="dec-seed" type="number" value="987654321">
+                </div>
+                <div class="demo-row">
+                    <button class="demo-btn" onclick="runDecode()">🔓 Decode Message</button>
+                </div>
+                <div class="demo-output" id="dec-output">Output will appear here…</div>
+            </div>
+
+            <!-- Pixel Inspector -->
+            <div class="demo-panel" id="demo-pixel">
+                <p style="color:#aaa; font-size:0.87rem; margin-top:0; line-height:1.6;">
+                    The visualiser below generates a small 8×8 pixel grid. Each pixel holds
+                    <strong>3 bits</strong> of payload (1 bit per R/G/B channel) in its LSB.
+                    Notice how the colour changes are invisible to the naked eye yet the bit
+                    difference is exact and recoverable.
+                </p>
+                <div class="demo-row">
+                    <label>Payload Text</label>
+                    <input class="demo-input" id="pix-msg" type="text" value="Hi!" maxlength="8">
+                    <button class="demo-btn" onclick="runPixelInspect()">🖼️ Visualise</button>
+                </div>
+                <div class="pixel-canvas-row">
+                    <div class="pixel-canvas-wrap">
+                        <canvas id="pix-original" width="200" height="200" style="border-radius:8px; border:1px solid rgba(0,212,255,0.2);"></canvas>
+                        <p>Original Image</p>
+                    </div>
+                    <div class="pixel-canvas-wrap">
+                        <canvas id="pix-stego" width="200" height="200" style="border-radius:8px; border:1px solid rgba(0,212,255,0.2);"></canvas>
+                        <p>Stego Image</p>
+                    </div>
+                </div>
+                <div class="demo-output" id="pix-output" style="margin-top:10px; min-height:60px;"></div>
+            </div>
+        </div>
+
+        <!-- Key outcomes -->
+        <h3 style="color:var(--accent,#00d4ff); margin:1.8rem 0 0.8rem;">
+            <i class="fas fa-trophy" style="margin-right:8px;"></i>Key Outcomes &amp; Metrics
+        </h3>
+        <div class="concept-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+            <div class="concept-card" style="text-align:center;">
+                <span class="algo-icon">📊</span>
+                <h4 style="font-size:1.6rem;">≥ 50 dB</h4>
+                <p>PSNR — well above the 40 dB threshold for imperceptible distortion.</p>
+            </div>
+            <div class="concept-card" style="text-align:center;">
+                <span class="algo-icon">🎯</span>
+                <h4 style="font-size:1.6rem;">3 Bits/px</h4>
+                <p>Embedding capacity across R, G, B channels without visible artefacts.</p>
+            </div>
+            <div class="concept-card" style="text-align:center;">
+                <span class="algo-icon">📡</span>
+                <h4 style="font-size:1.6rem;">P2P</h4>
+                <p>End-to-end transmission of stego images over ESP32 wireless link.</p>
+            </div>
+            <div class="concept-card" style="text-align:center;">
+                <span class="algo-icon">🔑</span>
+                <h4 style="font-size:1.6rem;">Dual PRNG</h4>
+                <p>Independent PRNG instances for pixel shuffle and cipher — no keystream collision.</p>
+            </div>
+        </div>
+
+    </div><!-- /blog-stego -->
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 CyberTech. All rights reserved.</p>
+        <div class="social-links">
+            <a href="https://github.com/aimanrasman"  target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://instagram.com/aimwno"   target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/60134081460"       target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+    <script>
+    /* ════════════════════════════════════════════════════
+       BLOG TAB SWITCHER
+    ════════════════════════════════════════════════════ */
+    function switchBlogTab(id, btn) {
+        document.querySelectorAll('.blog-section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.blog-tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById('blog-' + id).classList.add('active');
+        btn.classList.add('active');
+    }
+
+    /* ════════════════════════════════════════════════════
+       PATHFINDING VISUALIZER
+    ════════════════════════════════════════════════════ */
+    const VIZ_LAYOUT = [
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 1, 1, 1, 1, 1, 1, 1, 1],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [1, 1, 0, 1, 1, 0, 1, 1, 1],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0]
+    ];
+    const VIZ_START = { r: 0, c: 0 };
+    const VIZ_GOAL  = { r: 4, c: 8 };
+    const VIZ_LABELS = {
+        "0,0":"Library","0,5":"Admin","0,8":"Lab",
+        "2,2":"Cafe","2,5":"SC","2,8":"LH",
+        "4,0":"Hostel","4,4":"Mosque","4,8":"MH"
+    };
+
+    let vizAlgo = 'BFS', vizSteps = [], vizIdx = 0, vizPlaying = false, vizInterval;
+
+    function vizCreateGrid() {
+        const g = document.getElementById('v-grid');
+        g.innerHTML = '';
+        for (let r = 0; r < 5; r++) {
+            for (let c = 0; c < 9; c++) {
+                const cell = document.createElement('div');
+                cell.id = `v-cell-${r}-${c}`;
+                cell.className = 'v-cell';
+                if (VIZ_LAYOUT[r][c] === 1) cell.classList.add('wall');
+                if (r === VIZ_START.r && c === VIZ_START.c) cell.classList.add('start');
+                if (r === VIZ_GOAL.r  && c === VIZ_GOAL.c)  cell.classList.add('goal');
+                const key = `${r},${c}`;
+                if (VIZ_LABELS[key]) cell.innerText = VIZ_LABELS[key];
+                g.appendChild(cell);
+            }
+        }
+    }
+
+    function vizGetNeighbors(r, c) {
+        return [[-1,0],[1,0],[0,-1],[0,1]]
+            .map(([dr,dc]) => ({ r: r+dr, c: c+dc }))
+            .filter(n => n.r>=0 && n.r<5 && n.c>=0 && n.c<9 && VIZ_LAYOUT[n.r][n.c]===0);
+    }
+    function manhattan(r, c) { return Math.abs(r - VIZ_GOAL.r) + Math.abs(c - VIZ_GOAL.c); }
+
+    function vizRunSearch() {
+        vizSteps = [];
+        let frontier = [], visited = new Set(), parent = {}, gScore = {};
+        const sk = `${VIZ_START.r},${VIZ_START.c}`;
+        visited.add(sk); gScore[sk] = 0;
+
+        if (vizAlgo === 'BFS' || vizAlgo === 'DFS') frontier.push(VIZ_START);
+        else if (vizAlgo === 'Greedy') frontier.push({...VIZ_START, h: manhattan(VIZ_START.r, VIZ_START.c)});
+        else frontier.push({...VIZ_START, f: manhattan(VIZ_START.r, VIZ_START.c), g: 0});
+
+        let found = false;
+        while (frontier.length > 0) {
+            let curr;
+            if (vizAlgo === 'DFS') curr = frontier.pop();
+            else if (vizAlgo === 'BFS') curr = frontier.shift();
+            else { frontier.sort((a,b) => (a.f!==undefined ? a.f-b.f : a.h-b.h)); curr = frontier.shift(); }
+
+            const ck = `${curr.r},${curr.c}`;
+            vizSteps.push({
+                current: curr, frontier: [...frontier], visited: Array.from(visited),
+                msg: `Visiting [${curr.r},${curr.c}]` +
+                    (VIZ_LABELS[ck] ? ` (${VIZ_LABELS[ck]})` : '') +
+                    (curr.h !== undefined ? ` h=${curr.h}` : '') +
+                    (curr.f !== undefined ? ` f=${curr.f} g=${curr.g}` : '')
+            });
+
+            if (curr.r === VIZ_GOAL.r && curr.c === VIZ_GOAL.c) {
+                found = true;
+                let p = ck, path = [];
+                while (p) { path.unshift(p); p = parent[p]; }
+                vizSteps.push({ current: curr, frontier: [], visited: Array.from(visited),
+                    path, msg: `✅ Goal found! Path length: ${path.length - 1}` });
+                break;
+            }
+
+            for (let n of vizGetNeighbors(curr.r, curr.c)) {
+                const nk = `${n.r},${n.c}`;
+                if (vizAlgo === 'A*') {
+                    let tg = gScore[ck] + 1;
+                    if (!gScore.hasOwnProperty(nk) || tg < gScore[nk]) {
+                        gScore[nk] = tg; parent[nk] = ck; visited.add(nk);
+                        frontier.push({ r: n.r, c: n.c, g: tg, f: tg + manhattan(n.r, n.c) });
+                    }
+                } else if (!visited.has(nk)) {
+                    visited.add(nk); parent[nk] = ck;
+                    if (vizAlgo === 'Greedy') frontier.push({ r: n.r, c: n.c, h: manhattan(n.r, n.c) });
+                    else frontier.push({ r: n.r, c: n.c });
+                }
+            }
+        }
+        if (!found) vizSteps.push({ msg: '❌ Goal unreachable.' });
+    }
+
+    function vizRenderStep(idx) {
+        if (idx >= vizSteps.length) return;
+        const s = vizSteps[idx];
+        vizCreateGrid();
+        (s.visited  || []).forEach(v => { const [r,c]=v.split(','); document.getElementById(`v-cell-${r}-${c}`)?.classList.add('visited'); });
+        (s.frontier || []).forEach(f => { document.getElementById(`v-cell-${f.r}-${f.c}`)?.classList.add('frontier'); });
+        if (s.current) document.getElementById(`v-cell-${s.current.r}-${s.current.c}`)?.classList.add('current');
+        if (s.path) {
+            s.path.forEach(p => {
+                const [r,c] = p.split(',');
+                const el = document.getElementById(`v-cell-${r}-${c}`);
+                if (el) { el.className = 'v-cell path'; }
+            });
+            document.getElementById('v-stat-path').innerText = s.path.length - 1;
+        }
+        document.getElementById('v-stat-expanded').innerText = idx + 1;
+        document.getElementById('v-stat-frontier').innerText = (s.frontier || []).length;
+        const logEl = document.getElementById('v-log');
+        logEl.innerHTML += `<div>> ${s.msg}</div>`;
+        logEl.scrollTop = logEl.scrollHeight;
+    }
+
+    function vizSetAlgo(algo) {
+        vizAlgo = algo;
+        document.querySelectorAll('.algo-btn-viz').forEach(b => b.classList.remove('active-algo'));
+        const idMap = {'BFS':'v-btn-bfs','DFS':'v-btn-dfs','Greedy':'v-btn-greedy','A*':'v-btn-astar'};
+        document.getElementById(idMap[algo])?.classList.add('active-algo');
+        document.getElementById('v-stat-algo').innerText = algo;
+        vizReset();
+    }
+    function vizReset() {
+        clearInterval(vizInterval); vizPlaying = false;
+        document.getElementById('v-playBtn').innerText = '▶ Play';
+        document.getElementById('v-log').innerHTML = '';
+        document.getElementById('v-stat-expanded').innerText = '0';
+        document.getElementById('v-stat-frontier').innerText = '0';
+        document.getElementById('v-stat-path').innerText = '—';
+        vizIdx = 0; vizCreateGrid(); vizRunSearch();
+    }
+    function vizStep() {
+        if (vizIdx < vizSteps.length) { vizRenderStep(vizIdx); vizIdx++; }
+    }
+    function vizPlayPause() {
+        if (vizPlaying) {
+            clearInterval(vizInterval); vizPlaying = false;
+            document.getElementById('v-playBtn').innerText = '▶ Play';
+        } else {
+            if (vizIdx >= vizSteps.length) vizReset();
+            vizPlaying = true;
+            document.getElementById('v-playBtn').innerText = '⏸ Pause';
+            vizInterval = setInterval(() => {
+                if (vizIdx < vizSteps.length) { vizStep(); }
+                else { clearInterval(vizInterval); vizPlaying = false; document.getElementById('v-playBtn').innerText = '▶ Play'; }
+            }, 320);
+        }
+    }
+
+    /* ════════════════════════════════════════════════════
+       STEGANOGRAPHY DEMO
+    ════════════════════════════════════════════════════ */
+    function switchDemoTab(id, btn) {
+        document.querySelectorAll('.demo-panel').forEach(p => p.classList.remove('active'));
+        document.querySelectorAll('.demo-tab').forEach(b => b.classList.remove('active'));
+        document.getElementById('demo-' + id).classList.add('active');
+        btn.classList.add('active');
+        if (id === 'pixel') initPixelCanvases();
+    }
+
+    /* Simple seeded LCG PRNG (mirrors Java's Random closely enough for demo) */
+    function makePRNG(seed) {
+        let s = BigInt(seed) & 0xffffffffffffn;
+        return { next: (bound) => {
+            s = (s * 0x5deece66dn + 0xbn) & 0xffffffffffffn;
+            const bits = Number(s >> 17n);
+            return bound ? bits % bound : bits;
+        }};
+    }
+
+    function xorEncrypt(text, seed) {
+        const prng = makePRNG(seed);
+        return Array.from(text).map(ch => {
+            const key = prng.next(256);
+            return (ch.charCodeAt(0) ^ key).toString(16).padStart(2, '0');
+        }).join(' ');
+    }
+    function xorDecrypt(hexStr, seed) {
+        const prng = makePRNG(seed);
+        try {
+            return hexStr.trim().split(/\s+/).map(h => {
+                const key = prng.next(256);
+                return String.fromCharCode(parseInt(h, 16) ^ key);
+            }).join('');
+        } catch { return '[Error: invalid hex payload]'; }
+    }
+
+    function randomSeed() {
+        const s = Math.floor(Math.random() * 999999999) + 1;
+        document.getElementById('enc-seed').value = s;
+    }
+
+    function runEncode() {
+        const msg  = document.getElementById('enc-msg').value;
+        const seed = parseInt(document.getElementById('enc-seed').value) || 987654321;
+        if (!msg.trim()) { document.getElementById('enc-output').textContent = 'Please enter a message.'; return; }
+
+        const enc = xorEncrypt(msg, seed);
+        const bits = Array.from(enc.replace(/\s/g,'')).map(h => parseInt(h,16).toString(2).padStart(4,'0')).join('');
+        document.getElementById('dec-payload').value = enc;
+        document.getElementById('dec-seed').value    = seed;
+
+        document.getElementById('enc-output').textContent =
+`🔒 Encoding Complete
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Original  : "${msg}"
+Seed      : ${seed}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+XOR Payload (hex):
+${enc}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Bits needed  : ${bits.length}
+Pixels needed: ${Math.ceil(bits.length / 3)}  (@ 3 bits/pixel)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ Payload copied to Decode tab automatically.`;
+    }
+
+    function runDecode() {
+        const hexStr = document.getElementById('dec-payload').value;
+        const seed   = parseInt(document.getElementById('dec-seed').value) || 987654321;
+        if (!hexStr.trim()) { document.getElementById('dec-output').textContent = 'Please paste an encoded payload.'; return; }
+
+        const decoded = xorDecrypt(hexStr, seed);
+        const wrongSeed = parseInt(document.getElementById('dec-seed').value) !== parseInt(document.getElementById('enc-seed').value || 0);
+
+        document.getElementById('dec-output').textContent =
+`🔓 Decoding Complete
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Seed used : ${seed}
+Payload   : ${hexStr.trim()}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Decrypted : "${decoded}"
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+${decoded.match(/^[\x20-\x7e]+$/) ? '✅ Looks like valid text!' : '⚠️  Garbled output — wrong seed or corrupted payload.'}`;
+    }
+
+    /* Pixel Inspector */
+    let pixOriginalData = null;
+    function initPixelCanvases() {
+        const oc = document.getElementById('pix-original');
+        const sc = document.getElementById('pix-stego');
+        const ctx = oc.getContext('2d');
+        // Generate colourful 8x8 original image
+        pixOriginalData = [];
+        for (let i = 0; i < 8; i++) {
+            pixOriginalData[i] = [];
+            for (let j = 0; j < 8; j++) {
+                pixOriginalData[i][j] = [
+                    Math.floor(Math.random() * 256),
+                    Math.floor(Math.random() * 256),
+                    Math.floor(Math.random() * 256)
+                ];
+            }
+        }
+        drawPixelGrid(oc, pixOriginalData);
+        drawPixelGrid(sc, pixOriginalData); // same until encode
+        document.getElementById('pix-output').textContent = 'Click "Visualise" to embed a message and compare.';
+    }
+
+    function drawPixelGrid(canvas, data) {
+        const ctx = canvas.getContext('2d');
+        const cell = canvas.width / 8;
+        for (let i = 0; i < 8; i++) {
+            for (let j = 0; j < 8; j++) {
+                const [r,g,b] = data[i][j];
+                ctx.fillStyle = `rgb(${r},${g},${b})`;
+                ctx.fillRect(j*cell, i*cell, cell, cell);
+                // pixel coords
+                ctx.fillStyle = 'rgba(0,0,0,0.45)';
+                ctx.font = '8px monospace';
+                ctx.fillText(`${r},${g},${b}`, j*cell+2, i*cell+10);
+            }
+        }
+    }
+
+    function runPixelInspect() {
+        if (!pixOriginalData) initPixelCanvases();
+        const msg   = document.getElementById('pix-msg').value || 'Hi!';
+        const bits  = Array.from(msg).flatMap(ch =>
+            ch.charCodeAt(0).toString(2).padStart(8,'0').split('').map(Number));
+
+        // Deep copy original
+        const stegoData = pixOriginalData.map(row => row.map(px => [...px]));
+
+        let bitIdx = 0;
+        const changes = [];
+        outer:
+        for (let i = 0; i < 8; i++) {
+            for (let j = 0; j < 8; j++) {
+                for (let ch = 0; ch < 3 && bitIdx < bits.length; ch++, bitIdx++) {
+                    const old = stegoData[i][j][ch];
+                    stegoData[i][j][ch] = (old & 0xFE) | bits[bitIdx];
+                    if (old !== stegoData[i][j][ch]) changes.push(`(${i},${j}) ch${ch}: ${old}→${stegoData[i][j][ch]}`);
+                }
+                if (bitIdx >= bits.length) break outer;
+            }
+        }
+
+        drawPixelGrid(document.getElementById('pix-stego'), stegoData);
+
+        const mse  = calcMSE(pixOriginalData, stegoData);
+        const psnr = mse === 0 ? Infinity : (10 * Math.log10(255*255 / mse));
+
+        document.getElementById('pix-output').textContent =
+`Message embedded: "${msg}"   (${bits.length} bits → ${Math.ceil(bits.length/3)} pixels used)
+Pixel changes    : ${changes.length}
+Changed pixels   : ${changes.slice(0,6).join(', ')}${changes.length>6?'…':''}
+MSE              : ${mse.toFixed(5)}
+PSNR             : ${psnr === Infinity ? '∞' : psnr.toFixed(2)} dB   (> 50 dB = imperceptible ✅)`;
+    }
+
+    function calcMSE(orig, stego) {
+        let sum = 0, count = 0;
+        for (let i = 0; i < 8; i++)
+            for (let j = 0; j < 8; j++)
+                for (let c = 0; c < 3; c++) {
+                    const d = orig[i][j][c] - stego[i][j][c];
+                    sum += d*d; count++;
+                }
+        return sum / count;
+    }
+
+    /* ── Init ── */
+    document.addEventListener('DOMContentLoaded', () => {
+        vizReset();
+    });
+    </script>
+</body>
+</html>

@@ -1,13 +1,4 @@
 
-//smooth scrooling
-document.querySelectorAll('a[href^="#"]').forEach (anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute ('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
-    });
-});
 
 //Navbar scroll effect//
 
@@ -171,5 +162,48 @@ document.addEventListener("DOMContentLoaded", () => {
             fadeSlides[currentSlide].classList.add('active');
             
         }, 4000); 
+    }
+});
+
+// --- HIGHLIGHT ACTIVE NAVBAR LINK --- //
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Get the current URL of the page the user is on
+    // We split by '/' and pop() to get just the filename (e.g., "skills.html")
+    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+    
+    // 2. Grab all the links inside your navigation menu
+    const navLinks = document.querySelectorAll('.nav-links a');
+    
+    // 3. Loop through each link
+    navLinks.forEach(link => {
+        // Get the filename the link is pointing to
+        const linkPath = link.getAttribute('href');
+
+        // If the link's destination matches the current page...
+        if (linkPath === currentPath) {
+            // ...add the 'active-link' CSS class to light it up!
+            link.classList.add('active-link');
+        }
+    });
+});
+
+// --- MOBILE NAVBAR HAMBURGER TOGGLE --- //
+document.addEventListener('DOMContentLoaded', () => {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', () => {
+            // Toggles the slide-down view
+            navLinks.classList.toggle('active');
+            
+            // Swaps the icon between the bars (☰) and an X (✕) close mark
+            const icon = menuToggle.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.className = 'fas fa-times';
+            } else {
+                icon.className = 'fas fa-bars';
+            }
+        });
     }
 });
