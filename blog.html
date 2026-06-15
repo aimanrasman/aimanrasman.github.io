@@ -405,6 +405,30 @@
             font-weight: 600;
         }
 
+        /* GitHub Project Button */
+        .github-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 0.7rem 1.8rem;
+            margin-top: 1.5rem;
+            border: 2px solid var(--accent, #00d4ff);
+            border-radius: 30px;
+            background: rgba(0, 212, 255, 0.08);
+            color: var(--accent, #00d4ff);
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .github-btn:hover {
+            background: var(--accent, #00d4ff);
+            color: #0a0a1a;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0, 212, 255, 0.3);
+        }
+
         /* section divider */
         .blog-divider {
             border: none;
@@ -507,6 +531,9 @@
                 map layout. It was built to solidify understanding of uninformed vs. informed search strategies,
                 time/space complexity trade-offs, and algorithm correctness — core pillars of the AI software
                 development process.</p>
+            <a href="https://github.com/aimanrasman/Algorithm-Search" target="_blank" class="github-btn">
+                <i class="fab fa-github"></i> View Project Details on GitHub
+            </a>
         </div>
 
         <!-- SDLC overview -->
@@ -726,6 +753,9 @@
             <p>A full-stack Java desktop application that conceals any file inside a PNG image using a three-layer
                 security pipeline: PRNG-shuffled pixel selection, XOR cipher encryption, and Least Significant Bit
                 (LSB) substitution. Designed for point-to-point transmission over an ESP32 wireless link.</p>
+            <a href="https://github.com/aimanrasman/StegNo" target="_blank" class="github-btn">
+                <i class="fab fa-github"></i> View Project Details on GitHub
+            </a>
         </div>
 
         <!-- SDLC process -->
