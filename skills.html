@@ -23,71 +23,151 @@
             <li><a href="blog.html">Blog</a></li>
             <li><a href="skills.html">Skills</a></li>
             <li><a href="projects.html">Projects</a></li>
-            <li><a href="leadership.html">Leadership</a></li>
-            <li><a href="awards.html">Awards</a></li>
-            <li><a href="experience.html">Experience</a></li>
+            <li><a href="roadmap.html">Roadmap</a></li>
+            <li><a href="evidence.html">Evidence</a></li>
+            <li><a href="reflection.html">Reflection</a></li>
             <li><a href="contact.html">Contact</a></li>
         </ul>
      </nav>
 
      <!--Skills Section-->
-      <section id="skills" class="skills bg-darker">
-        <h2 id="skills" style="margin-top: 5rem;">Technical Expertise</h2>
+      <!--Skills Section-->
+      <section id="skills" class="skills section-padding">
+        <h2 style="margin-top: 3rem;">Technical & Professional <span class="accent-blue">Expertise</span></h2>
         
-        <div class="vertical-layout">
+        <div class="vertical-layout" style="gap: 3rem; max-width: 1000px;">
             
-            <!-- Category 1: Cybersecurity Operations -->
-            <div class="vertical-item reveal-on-scroll">
-                <!-- NEW: LGMS Style Logo Grid (Replaced the Shield Icon) -->
-                <div class="tool-logo-grid">
-                    <!-- Make sure these filenames match exactly what you upload to GitHub! -->
-                    <img src="kali linux logo.png" alt="Kali Linux" title="Kali Linux">
-                    <img src="burp suite.png" alt="Burp Suite" title="Burp Suite">
-                    <img src="metasploit logo.png" alt="Metasploit" title="Metasploit">
+            <!-- Category 1: Networking & Security -->
+            <div class="skill-category-card reveal-on-scroll">
+                <div class="category-header">
+                    <h3>CYBERSECURITY & FORENSICS</h3>
+                    <span class="category-tag">// OPERATIONS</span>
                 </div>
                 
-                <div class="vertical-content">
-                    <h3>Cybersecurity Operations</h3>
-                    <p>Executing comprehensive vulnerability assessments and penetration tests to proactively identify and remediate system weaknesses</p>
+                <div class="skill-bars-grid">
+                    <!-- Skill 1 -->
+                    <div class="skill-bar-item">
+                        <div class="skill-info">
+                            <span class="skill-name"><i class="fas fa-network-wired"></i> Traffic Analysis (Wireshark)</span>
+                            <span class="skill-pct">92%</span>
+                        </div>
+                        <div class="progress-track"><div class="progress-fill" style="width: 92%;"></div></div>
+                    </div>
+                    <!-- Skill 2 -->
+                    <div class="skill-bar-item">
+                        <div class="skill-info">
+                            <span class="skill-name"><i class="fas fa-search"></i> Scanning & Enumeration (Nmap)</span>
+                            <span class="skill-pct">88%</span>
+                        </div>
+                        <div class="progress-track"><div class="progress-fill" style="width: 88%;"></div></div>
+                    </div>
+                    <!-- Skill 3 -->
+                    <div class="skill-bar-item">
+                        <div class="skill-info">
+                            <span class="skill-name"><i class="fas fa-user-secret"></i> Penetration Testing (Metasploit/Burp)</span>
+                            <span class="skill-pct">85%</span>
+                        </div>
+                        <div class="progress-track"><div class="progress-fill" style="width: 85%;"></div></div>
+                    </div>
+                    <!-- Skill 4 -->
+                    <div class="skill-bar-item">
+                        <div class="skill-info">
+                            <span class="skill-name"><i class="fas fa-microscope"></i> OSINT & Forensics (Autopsy/ExifTool)</span>
+                            <span class="skill-pct">86%</span>
+                        </div>
+                        <div class="progress-track"><div class="progress-fill" style="width: 86%;"></div></div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Category 2: Network Security & Forensics -->
-            <div class="vertical-item reveal-on-scroll">
-                <!-- NEW: LGMS Style Logo Grid (Replaced the Magnifying Glass Icon) -->
-                <div class="tool-logo-grid">
-                    <img src="wireshark logo.png" alt="Wireshark" title="Wireshark">
-                    <img src="nmap logo.png" alt="Nmap" title="Nmap">
-                    <img src="autopsy logo.png" alt="Autopsy" title="Autopsy">
-                    <img src="exiftool logo.png" alt="ExifTool" title="ExifTool">
-                    <img src="hashcat logo.png" alt="HashCat" title="HashCat">
-                    <img src="HxD logo.png" alt="HxD" title="HxD">
-                    <img src="john the reaper logo.png" alt="John the Ripper" title="John the Ripper">
+            <!-- Category 2: Systems & Cryptography -->
+            <div class="skill-category-card reveal-on-scroll">
+                <div class="category-header">
+                    <h3>SYSTEMS & CRYPTOGRAPHY</h3>
+                    <span class="category-tag">// CORE DEV</span>
                 </div>
-
-                <div class="vertical-content">
-                    <h3>Network Security & Forensics</h3>
-                    <p>Analyzing network traffic and conducting in-depth digital forensics investigations to uncover, trace, and respond to security incidents.</p>
+                
+                <div class="skill-bars-grid">
+                    <!-- Skill 1 -->
+                    <div class="skill-bar-item">
+                        <div class="skill-info">
+                            <span class="skill-name"><i class="fas fa-terminal"></i> Linux CLI & Administration</span>
+                            <span class="skill-pct">85%</span>
+                        </div>
+                        <div class="progress-track"><div class="progress-fill" style="width: 85%;"></div></div>
+                    </div>
+                    <!-- Skill 2 -->
+                    <div class="skill-bar-item">
+                        <div class="skill-info">
+                            <span class="skill-name"><i class="fas fa-key"></i> Cryptography (PRNG/XOR/LSB)</span>
+                            <span class="skill-pct">90%</span>
+                        </div>
+                        <div class="progress-track"><div class="progress-fill" style="width: 90%;"></div></div>
+                    </div>
+                    <!-- Skill 3 -->
+                    <div class="skill-bar-item">
+                        <div class="skill-info">
+                            <span class="skill-name"><i class="fas fa-code"></i> Core Coding (Python, Java, C++)</span>
+                            <span class="skill-pct">84%</span>
+                        </div>
+                        <div class="progress-track"><div class="progress-fill" style="width: 84%;"></div></div>
+                    </div>
+                    <!-- Skill 4 -->
+                    <div class="skill-bar-item">
+                        <div class="skill-info">
+                            <span class="skill-name"><i class="fas fa-microchip"></i> IoT Hardware (ESP32/Arduino)</span>
+                            <span class="skill-pct">92%</span>
+                        </div>
+                        <div class="progress-track"><div class="progress-fill" style="width: 92%;"></div></div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Category 3: Cryptography & IoT -->
-            <div class="vertical-item reveal-on-scroll">
-                <!-- NEW: LGMS Style Logo Grid (Replaced the Microchip Icon) -->
-                <div class="tool-logo-grid">
-                    <img src="python logo.png" alt="Python" title="Python">
-                    <img src="arduino logo.png" alt="ESP32" title="Arduino IDE">
-                    <img src="netbeans logo.png" alt="ESP32" title="NetBeans">
+            <!-- Category 3: Soft Skills -->
+            <div class="skill-category-card reveal-on-scroll">
+                <div class="category-header">
+                    <h3>PROFESSIONAL TRAITS</h3>
+                    <span class="category-tag">// SOFT SKILLS</span>
                 </div>
-
-                <div class="vertical-content">
-                    <h3>Cryptography & IoT</h3>
-                    <p>Designing secure embedded systems and implementing hybrid cryptographic techniques for robust data protection on microcontrollers.</p>
+                
+                <div class="skill-bars-grid">
+                    <!-- Skill 1 -->
+                    <div class="skill-bar-item">
+                        <div class="skill-info">
+                            <span class="skill-name"><i class="fas fa-users"></i> Leadership & Team Management</span>
+                            <span class="skill-pct">95%</span>
+                        </div>
+                        <div class="progress-track"><div class="progress-fill" style="width: 95%;"></div></div>
+                    </div>
+                    <!-- Skill 2 -->
+                    <div class="skill-bar-item">
+                        <div class="skill-info">
+                            <span class="skill-name"><i class="fas fa-project-diagram"></i> Structured Analytical Thinking</span>
+                            <span class="skill-pct">90%</span>
+                        </div>
+                        <div class="progress-track"><div class="progress-fill" style="width: 90%;"></div></div>
+                    </div>
+                    <!-- Skill 3 -->
+                    <div class="skill-bar-item">
+                        <div class="skill-info">
+                            <span class="skill-name"><i class="fas fa-lightbulb"></i> Critical Problem Solving</span>
+                            <span class="skill-pct">88%</span>
+                        </div>
+                        <div class="progress-track"><div class="progress-fill" style="width: 88%;"></div></div>
+                    </div>
+                    <!-- Skill 4 -->
+                    <div class="skill-bar-item">
+                        <div class="skill-info">
+                            <span class="skill-name"><i class="fas fa-comments"></i> Technical Communication</span>
+                            <span class="skill-pct">85%</span>
+                        </div>
+                        <div class="progress-track"><div class="progress-fill" style="width: 85%;"></div></div>
+                    </div>
                 </div>
             </div>
 
         </div>   
-       </section>
+      </section>
 
        <!-- Footer-->
         <footer>

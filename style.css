@@ -813,3 +813,314 @@ h2 {
     background-color: #f0f0f0 !important; 
     font-weight: 700 !important;
 }
+
+/* --- SKILL BARS LAYOUT (Like Reference Image) --- */
+
+.skill-category-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    border-radius: 12px;
+    padding: 2.5rem;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.skill-category-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 10px 30px var(--accent-glow);
+}
+
+.category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid rgba(74, 144, 226, 0.1);
+}
+
+.category-header h3 {
+    margin: 0;
+    color: var(--text);
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+}
+
+.category-tag {
+    color: var(--accent); /* Changed from the red #e53e3e to your blue theme color */
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+}
+
+.skill-bars-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 4rem;
+    row-gap: 2rem;
+}
+
+.skill-bar-item {
+    width: 100%;
+}
+
+.skill-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.skill-name {
+    color: var(--text);
+}
+
+.skill-name i {
+    color: var(--accent);
+    width: 25px;
+    text-align: center;
+    margin-right: 8px;
+    font-size: 1.1rem;
+    background: rgba(74, 144, 226, 0.1);
+    padding: 6px;
+    border-radius: 50%;
+}
+
+.skill-pct {
+    color: var(--accent);
+    font-weight: 700;
+}
+
+.progress-track {
+    background: rgba(0, 0, 0, 0.08);
+    height: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.progress-fill {
+    background: var(--accent);
+    height: 100%;
+    border-radius: 10px;
+    /* Adding a subtle gradient to the bar for extra polish */
+    background: linear-gradient(90deg, #2980b9, var(--accent));
+    transition: width 1.5s cubic-bezier(0.1, 0.7, 0.1, 1);
+}
+
+/* Mobile Responsiveness for Skill Bars */
+@media (max-width: 768px) {
+    .skill-bars-grid {
+        grid-template-columns: 1fr; /* Stacks to single column on phones */
+    }
+    .category-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+}
+
+/* =========================================
+   CAREER PLAN SPECIFIC STYLING
+========================================= */
+
+/* --- Roadmap Status Box --- */
+.status-box {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto 3rem auto;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+}
+
+.status-row {
+    margin-bottom: 1.5rem;
+}
+
+.status-row:last-child {
+    margin-bottom: 0;
+}
+
+.status-row h4 {
+    color: var(--text);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.cert-tags {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+/* --- Evidence Image Grids --- */
+.evidence-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.evidence-title {
+    color: var(--text);
+    border-bottom: 2px solid rgba(74, 144, 226, 0.2);
+    padding-bottom: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.evidence-title i {
+    color: var(--accent);
+    margin-right: 10px;
+}
+
+.cert-grid {
+    display: grid;
+    /* This creates the perfect 3-column side-by-side layout */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.cert-item {
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.cert-item:hover {
+    transform: translateY(-5px);
+}
+
+.cert-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+    border: 1px solid rgba(74, 144, 226, 0.15);
+    margin-bottom: 1rem;
+    object-fit: cover;
+}
+
+.cert-item p {
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+}
+
+/* --- Magazine Style Hero (Reflection Section) --- */
+.magazine-hero {
+    position: relative;
+    text-align: center;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.magazine-bg-text {
+    /* Uses clamp to be massive on desktop, but shrink on phones */
+    font-size: clamp(5rem, 15vw, 12rem);
+    font-weight: 900;
+    color: var(--accent);
+    line-height: 1;
+    margin: 0;
+    opacity: 0.9;
+    text-transform: uppercase;
+    font-family: 'Segoe UI', Impact, sans-serif;
+    letter-spacing: -2px;
+}
+
+.magazine-image-wrapper {
+    /* Reduced from -6% to -2% to push the image down and reveal the text */
+    margin-top: -2%; 
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    width: 90%;
+}
+
+.magazine-image-wrapper img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    /* A subtle glow to make it pop off the text */
+    border: 2px solid rgba(255, 255, 255, 0.1); 
+}
+
+.magazine-title {
+    margin-top: 2rem;
+}
+
+.magazine-title h2 {
+    font-size: clamp(1.8rem, 4vw, 3.5rem);
+    font-weight: 900;
+    color: var(--text);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    letter-spacing: 1px;
+}
+
+.magazine-title .accent-text {
+    color: var(--accent);
+}
+
+.magazine-subtitle {
+    font-size: 0.9rem;
+    letter-spacing: 6px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+/* --- Roadmap Certification Image Grid --- */
+.roadmap-cert-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap; /* Allows them to stack on mobile phones */
+    margin-top: 1.5rem;
+}
+
+.roadmap-cert-grid img {
+    height: 90px; /* Locks the height so all badges look uniform */
+    width: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.03); 
+    padding: 6px;
+    border: 1px solid rgba(74, 144, 226, 0.2); /* Your signature blue theme border */
+}
+
+.roadmap-cert-grid img:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent);
+    box-shadow: 0 8px 20px rgba(74, 144, 226, 0.15);
+}
+
+/* --- Large Certificate Modifier (For Document-Style Certs) --- */
+.roadmap-cert-grid.large-certs {
+    justify-content: center; /* Centers the images perfectly */
+    margin-top: 2rem;
+}
+
+.roadmap-cert-grid.large-certs img {
+    height: 160px; /* Makes the landscape documents much bigger */
+    width: auto;
+}
+
+/* Ensure large certificates don't break mobile screens */
+@media (max-width: 768px) {
+    .roadmap-cert-grid.large-certs img {
+        height: auto;
+        width: 100%;
+        max-width: 320px;
+    }
+}
